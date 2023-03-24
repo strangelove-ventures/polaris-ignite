@@ -1,0 +1,5 @@
+/__generated__/**/*
+/dist/**/*
+
+!/__generated__/**/.gitkeep
+!/dist/**/.gitkeep

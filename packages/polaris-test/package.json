@@ -1,0 +1,15 @@
+{
+  "name": "polaris-test",
+  "version": "0.0.0",
+  "scripts": {
+    "test": "tsx ./index.ts"
+  },
+  "dependencies": {
+    "@strangelovelabs/polaris": "workspace:*",
+    "node-fetch-native": "^1.0.2"
+  },
+  "devDependencies": {
+    "tsx": "^3.12.6"
+  },
+  "private": true
+}
