@@ -27,5 +27,8 @@
   },
   "devDependencies": {},
   "keywords": [],
+  "publishConfig": {
+    "access": "public"
+  },
   "license": "MIT"
 }
