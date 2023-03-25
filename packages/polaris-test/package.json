@@ -6,6 +6,7 @@
   },
   "dependencies": {
     "@strangelovelabs/polaris": "workspace:*",
+    "@strangelovelabs/polaris-ignite": "workspace:*",
     "node-fetch-native": "^1.0.2"
   },
   "devDependencies": {

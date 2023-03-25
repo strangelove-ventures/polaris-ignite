@@ -1,0 +1,18 @@
+{
+  "extends": "@strangelovelabs/style-guide/tsconfig.json",
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "declaration": true,
+    "esModuleInterop": false,
+    "isolatedModules": true,
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "strict": false,
+    "strictNullChecks": false
+  },
+  "exclude": ["node_modules"],
+  "include": ["**/*.ts"]
+}
