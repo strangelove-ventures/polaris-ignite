@@ -20,7 +20,7 @@
     "clean": "rm -rf dist/*",
     "gen:client": "oazapfts --optimistic ../../cosmos-sdk/client/docs/swagger-ui/swagger.yaml ./src/client.ts",
     "dev": "tsup --watch",
-    "lint": "eslint --fix \"src/**/*.{ts,tsx}\""
+    "lint": "eslint --fix \"src/**/*.ts\""
   },
   "dependencies": {
     "oazapfts": "^4.6.0"
