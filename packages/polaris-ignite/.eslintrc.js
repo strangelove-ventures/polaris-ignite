@@ -26,6 +26,7 @@ const eslintConfig = {
     camelcase: ["off"],
     "eslint-comments/disable-enable-pair": ["off"],
     "eslint-comments/no-unlimited-disable": ["off"],
+    "unicorn/prefer-node-protocol": ["off"],
   },
   overrides: [
     {

@@ -1,9 +1,8 @@
-import { EventEmitter } from "node:events";
-
 import type { StdFee } from "@cosmjs/launchpad";
 import type { EncodeObject, GeneratedType, OfflineSigner } from "@cosmjs/proto-signing";
 import { Registry } from "@cosmjs/proto-signing";
 import { SigningStargateClient } from "@cosmjs/stargate";
+import { EventEmitter } from "events";
 
 import type { Env } from "./env";
 import type { Constructor, Return, UnionToIntersection } from "./helpers";
