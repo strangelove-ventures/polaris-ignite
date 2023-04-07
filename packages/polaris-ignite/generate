@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
-cd ../../cosmos-sdk &&
+set -e
+rm -rf src/ &&
+  mkdir src/ &&
+  cd ../../cosmos-sdk &&
   ignite generate ts-client -o ../packages/polaris-ignite/src &&
   cd ../packages/polaris-ignite/src &&
   rm -rf package.json tsconfig.json types.d.ts &&
+  pnpm format &&
   pnpm lint

@@ -18,9 +18,10 @@
     "build": "pnpm build:src && pnpm build:types",
     "build:src": "tsup",
     "build:types": "tsc --project ./tsconfig.types.json",
-    "format": "prettier --write \"**/*.ts\"",
+    "codemod": "tsx codemod.ts && pnpm format",
+    "format": "prettier --write \"src/**/*.ts\"",
     "generate": "bash generate",
-    "lint": "eslint --fix \"**/*.ts\"",
+    "lint": "eslint --fix \"src/**/*.ts\"",
     "prepublishOnly": "pnpm build"
   },
   "dependencies": {

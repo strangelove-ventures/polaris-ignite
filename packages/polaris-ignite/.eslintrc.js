@@ -26,6 +26,7 @@ const eslintConfig = {
     camelcase: ["off"],
     "eslint-comments/disable-enable-pair": ["off"],
     "eslint-comments/no-unlimited-disable": ["off"],
+    "no-param-reassign": ["off"],
     "unicorn/prefer-node-protocol": ["off"],
   },
   overrides: [
@@ -36,6 +37,7 @@ const eslintConfig = {
         "@typescript-eslint/no-unnecessary-condition": ["off"],
         "@typescript-eslint/no-unsafe-argument": ["warn"],
         "@typescript-eslint/no-unsafe-call": ["warn"],
+        "@typescript-eslint/prefer-for-of": ["off"],
       },
     },
   ],
