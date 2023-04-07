@@ -908,7 +908,7 @@ export class HttpClient<SecurityDataType = unknown> {
       ...params1,
       ...(params2 || {}),
       // @ts-expect-error force merge headers
-        headers: {
+      headers: {
         ...(this.instance.defaults.headers || {}),
         ...(params1.headers || {}),
         ...((params2 && params2.headers) || {}),
@@ -1033,7 +1033,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
 
   /**
  * @description When called from another module, this query might consume a high amount of gas if the pagination field is incorrectly set.
- *
+ * 
  * @tags Query
  * @name QueryDelegatorUnbondingDelegations
  * @summary DelegatorUnbondingDelegations queries all unbonding delegations of a given
@@ -1061,7 +1061,7 @@ delegator address.
 
   /**
  * @description When called from another module, this query might consume a high amount of gas if the pagination field is incorrectly set.
- *
+ * 
  * @tags Query
  * @name QueryDelegatorValidators
  * @summary DelegatorValidators queries all validators info for given delegator
@@ -1089,7 +1089,7 @@ address.
 
   /**
  * No description
- *
+ * 
  * @tags Query
  * @name QueryDelegatorValidator
  * @summary DelegatorValidator queries validator info for given delegator validator
@@ -1240,7 +1240,7 @@ pair.
 
   /**
  * No description
- *
+ * 
  * @tags Query
  * @name QueryUnbondingDelegation
  * @summary UnbondingDelegation queries unbonding info for given validator delegator

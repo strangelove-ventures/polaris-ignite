@@ -437,7 +437,7 @@ export class HttpClient<SecurityDataType = unknown> {
       ...params1,
       ...(params2 || {}),
       // @ts-expect-error force merge headers
-        headers: {
+      headers: {
         ...(this.instance.defaults.headers || {}),
         ...(params1.headers || {}),
         ...((params2 && params2.headers) || {}),
@@ -550,7 +550,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
 
   /**
  * @description When called from another module, this query might consume a high amount of gas if the pagination field is incorrectly set. Since: cosmos-sdk 0.46
- *
+ * 
  * @tags Query
  * @name QueryDenomOwners
  * @summary DenomOwners queries for all account addresses that own a particular token
@@ -578,7 +578,7 @@ denomination.
 
   /**
  * No description
- *
+ * 
  * @tags Query
  * @name QueryDenomsMetadata
  * @summary DenomsMetadata queries the client metadata for all registered coin
@@ -664,7 +664,7 @@ denominations.
 
   /**
  * @description When called from another module, this query might consume a high amount of gas if the pagination field is incorrectly set. Since: cosmos-sdk 0.46
- *
+ * 
  * @tags Query
  * @name QuerySpendableBalances
  * @summary SpendableBalances queries the spendable balance of all coins for a single
@@ -692,7 +692,7 @@ account.
 
   /**
  * @description When called from another module, this query might consume a high amount of gas if the pagination field is incorrectly set. Since: cosmos-sdk 0.47
- *
+ * 
  * @tags Query
  * @name QuerySpendableBalanceByDenom
  * @summary SpendableBalanceByDenom queries the spendable balance of a single denom for

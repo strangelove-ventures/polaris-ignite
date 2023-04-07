@@ -15,17 +15,11 @@ import { DelayedVestingAccount as typeDelayedVestingAccount } from "./types";
 import { Period as typePeriod } from "./types";
 import { PeriodicVestingAccount as typePeriodicVestingAccount } from "./types";
 import { PermanentLockedAccount as typePermanentLockedAccount } from "./types";
-import { MsgCreatePeriodicVestingAccount } from "./types/cosmos/vesting/v1beta1/tx";
 import { MsgCreateVestingAccount } from "./types/cosmos/vesting/v1beta1/tx";
 import { MsgCreatePermanentLockedAccount } from "./types/cosmos/vesting/v1beta1/tx";
+import { MsgCreatePeriodicVestingAccount } from "./types/cosmos/vesting/v1beta1/tx";
 
 export { MsgCreatePeriodicVestingAccount, MsgCreatePermanentLockedAccount, MsgCreateVestingAccount };
-
-export interface sendMsgCreatePeriodicVestingAccountParams {
-  value: MsgCreatePeriodicVestingAccount;
-  fee?: StdFee;
-  memo?: string;
-}
 
 export interface sendMsgCreateVestingAccountParams {
   value: MsgCreateVestingAccount;
@@ -39,8 +33,10 @@ export interface sendMsgCreatePermanentLockedAccountParams {
   memo?: string;
 }
 
-export interface msgCreatePeriodicVestingAccountParams {
+export interface sendMsgCreatePeriodicVestingAccountParams {
   value: MsgCreatePeriodicVestingAccount;
+  fee?: StdFee;
+  memo?: string;
 }
 
 export interface msgCreateVestingAccountParams {
@@ -51,12 +47,17 @@ export interface msgCreatePermanentLockedAccountParams {
   value: MsgCreatePermanentLockedAccount;
 }
 
+export interface msgCreatePeriodicVestingAccountParams {
+  value: MsgCreatePeriodicVestingAccount;
+}
+
 export const registry = new Registry(msgTypes);
 
 export interface Field {
   name: string;
   type: unknown;
 }
+
 const getStructure = (template) => {
   const structure: { fields: Field[] } = { fields: [] };
   for (const [key, value] of Object.entries(template)) {
@@ -80,24 +81,6 @@ export const txClient = (
   { signer, prefix, addr }: TxClientOptions = { addr: "http://localhost:26657", prefix: "cosmos" },
 ) => {
   return {
-    async sendMsgCreatePeriodicVestingAccount({
-      value,
-      fee,
-      memo,
-    }: sendMsgCreatePeriodicVestingAccountParams): Promise<DeliverTxResponse> {
-      if (!signer) {
-        throw new Error("TxClient:sendMsgCreatePeriodicVestingAccount: Unable to sign Tx. Signer is not present.");
-      }
-      try {
-        const { address } = (await signer.getAccounts())[0];
-        const signingClient = await SigningStargateClient.connectWithSigner(addr, signer, { registry /* prefix */ });
-        const msg = this.msgCreatePeriodicVestingAccount({ value: MsgCreatePeriodicVestingAccount.fromPartial(value) });
-        return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo);
-      } catch (e: any) {
-        throw new Error(`TxClient:sendMsgCreatePeriodicVestingAccount: Could not broadcast Tx: ${e.message}`);
-      }
-    },
-
     async sendMsgCreateVestingAccount({
       value,
       fee,
@@ -108,7 +91,9 @@ export const txClient = (
       }
       try {
         const { address } = (await signer.getAccounts())[0];
-        const signingClient = await SigningStargateClient.connectWithSigner(addr, signer, { registry /* prefix */ });
+        const signingClient = await SigningStargateClient.connectWithSigner(addr, signer, {
+          registry,
+        });
         const msg = this.msgCreateVestingAccount({ value: MsgCreateVestingAccount.fromPartial(value) });
         return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo);
       } catch (e: any) {
@@ -126,7 +111,9 @@ export const txClient = (
       }
       try {
         const { address } = (await signer.getAccounts())[0];
-        const signingClient = await SigningStargateClient.connectWithSigner(addr, signer, { registry /* prefix */ });
+        const signingClient = await SigningStargateClient.connectWithSigner(addr, signer, {
+          registry,
+        });
         const msg = this.msgCreatePermanentLockedAccount({ value: MsgCreatePermanentLockedAccount.fromPartial(value) });
         return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo);
       } catch (e: any) {
@@ -134,14 +121,23 @@ export const txClient = (
       }
     },
 
-    msgCreatePeriodicVestingAccount: ({ value }: msgCreatePeriodicVestingAccountParams): EncodeObject => {
+    async sendMsgCreatePeriodicVestingAccount({
+      value,
+      fee,
+      memo,
+    }: sendMsgCreatePeriodicVestingAccountParams): Promise<DeliverTxResponse> {
+      if (!signer) {
+        throw new Error("TxClient:sendMsgCreatePeriodicVestingAccount: Unable to sign Tx. Signer is not present.");
+      }
       try {
-        return {
-          typeUrl: "/cosmos.vesting.v1beta1.MsgCreatePeriodicVestingAccount",
-          value: MsgCreatePeriodicVestingAccount.fromPartial(value),
-        };
+        const { address } = (await signer.getAccounts())[0];
+        const signingClient = await SigningStargateClient.connectWithSigner(addr, signer, {
+          registry,
+        });
+        const msg = this.msgCreatePeriodicVestingAccount({ value: MsgCreatePeriodicVestingAccount.fromPartial(value) });
+        return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo);
       } catch (e: any) {
-        throw new Error(`TxClient:MsgCreatePeriodicVestingAccount: Could not create message: ${e.message}`);
+        throw new Error(`TxClient:sendMsgCreatePeriodicVestingAccount: Could not broadcast Tx: ${e.message}`);
       }
     },
 
@@ -164,6 +160,17 @@ export const txClient = (
         };
       } catch (e: any) {
         throw new Error(`TxClient:MsgCreatePermanentLockedAccount: Could not create message: ${e.message}`);
+      }
+    },
+
+    msgCreatePeriodicVestingAccount: ({ value }: msgCreatePeriodicVestingAccountParams): EncodeObject => {
+      try {
+        return {
+          typeUrl: "/cosmos.vesting.v1beta1.MsgCreatePeriodicVestingAccount",
+          value: MsgCreatePeriodicVestingAccount.fromPartial(value),
+        };
+      } catch (e: any) {
+        throw new Error(`TxClient:MsgCreatePeriodicVestingAccount: Could not create message: ${e.message}`);
       }
     },
   };

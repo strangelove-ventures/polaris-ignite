@@ -19,16 +19,10 @@ import { DenomUnit as typeDenomUnit } from "./types";
 import { Metadata as typeMetadata } from "./types";
 import { Balance as typeBalance } from "./types";
 import { DenomOwner as typeDenomOwner } from "./types";
-import { MsgMultiSend } from "./types/cosmos/bank/v1beta1/tx";
 import { MsgSend } from "./types/cosmos/bank/v1beta1/tx";
+import { MsgMultiSend } from "./types/cosmos/bank/v1beta1/tx";
 
 export { MsgMultiSend, MsgSend };
-
-export interface sendMsgMultiSendParams {
-  value: MsgMultiSend;
-  fee?: StdFee;
-  memo?: string;
-}
 
 export interface sendMsgSendParams {
   value: MsgSend;
@@ -36,12 +30,18 @@ export interface sendMsgSendParams {
   memo?: string;
 }
 
-export interface msgMultiSendParams {
+export interface sendMsgMultiSendParams {
   value: MsgMultiSend;
+  fee?: StdFee;
+  memo?: string;
 }
 
 export interface msgSendParams {
   value: MsgSend;
+}
+
+export interface msgMultiSendParams {
+  value: MsgMultiSend;
 }
 
 export const registry = new Registry(msgTypes);
@@ -50,6 +50,7 @@ export interface Field {
   name: string;
   type: unknown;
 }
+
 const getStructure = (template) => {
   const structure: { fields: Field[] } = { fields: [] };
   for (const [key, value] of Object.entries(template)) {
@@ -73,27 +74,15 @@ export const txClient = (
   { signer, prefix, addr }: TxClientOptions = { addr: "http://localhost:26657", prefix: "cosmos" },
 ) => {
   return {
-    async sendMsgMultiSend({ value, fee, memo }: sendMsgMultiSendParams): Promise<DeliverTxResponse> {
-      if (!signer) {
-        throw new Error("TxClient:sendMsgMultiSend: Unable to sign Tx. Signer is not present.");
-      }
-      try {
-        const { address } = (await signer.getAccounts())[0];
-        const signingClient = await SigningStargateClient.connectWithSigner(addr, signer, { registry /* prefix */ });
-        const msg = this.msgMultiSend({ value: MsgMultiSend.fromPartial(value) });
-        return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo);
-      } catch (e: any) {
-        throw new Error(`TxClient:sendMsgMultiSend: Could not broadcast Tx: ${e.message}`);
-      }
-    },
-
     async sendMsgSend({ value, fee, memo }: sendMsgSendParams): Promise<DeliverTxResponse> {
       if (!signer) {
         throw new Error("TxClient:sendMsgSend: Unable to sign Tx. Signer is not present.");
       }
       try {
         const { address } = (await signer.getAccounts())[0];
-        const signingClient = await SigningStargateClient.connectWithSigner(addr, signer, { registry /* prefix */ });
+        const signingClient = await SigningStargateClient.connectWithSigner(addr, signer, {
+          registry,
+        });
         const msg = this.msgSend({ value: MsgSend.fromPartial(value) });
         return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo);
       } catch (e: any) {
@@ -101,11 +90,19 @@ export const txClient = (
       }
     },
 
-    msgMultiSend: ({ value }: msgMultiSendParams): EncodeObject => {
+    async sendMsgMultiSend({ value, fee, memo }: sendMsgMultiSendParams): Promise<DeliverTxResponse> {
+      if (!signer) {
+        throw new Error("TxClient:sendMsgMultiSend: Unable to sign Tx. Signer is not present.");
+      }
       try {
-        return { typeUrl: "/cosmos.bank.v1beta1.MsgMultiSend", value: MsgMultiSend.fromPartial(value) };
+        const { address } = (await signer.getAccounts())[0];
+        const signingClient = await SigningStargateClient.connectWithSigner(addr, signer, {
+          registry,
+        });
+        const msg = this.msgMultiSend({ value: MsgMultiSend.fromPartial(value) });
+        return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo);
       } catch (e: any) {
-        throw new Error(`TxClient:MsgMultiSend: Could not create message: ${e.message}`);
+        throw new Error(`TxClient:sendMsgMultiSend: Could not broadcast Tx: ${e.message}`);
       }
     },
 
@@ -114,6 +111,14 @@ export const txClient = (
         return { typeUrl: "/cosmos.bank.v1beta1.MsgSend", value: MsgSend.fromPartial(value) };
       } catch (e: any) {
         throw new Error(`TxClient:MsgSend: Could not create message: ${e.message}`);
+      }
+    },
+
+    msgMultiSend: ({ value }: msgMultiSendParams): EncodeObject => {
+      try {
+        return { typeUrl: "/cosmos.bank.v1beta1.MsgMultiSend", value: MsgMultiSend.fromPartial(value) };
+      } catch (e: any) {
+        throw new Error(`TxClient:MsgMultiSend: Could not create message: ${e.message}`);
       }
     },
   };

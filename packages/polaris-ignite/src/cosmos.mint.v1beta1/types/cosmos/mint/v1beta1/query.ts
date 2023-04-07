@@ -344,7 +344,7 @@ export class QueryClientImpl implements Query {
   }
 }
 
-export interface Rpc {
+interface Rpc {
   request(service: string, method: string, data: Uint8Array): Promise<Uint8Array>;
 }
 

@@ -934,7 +934,7 @@ export class HttpClient<SecurityDataType = unknown> {
       ...params1,
       ...(params2 || {}),
       // @ts-expect-error force merge headers
-        headers: {
+      headers: {
         ...(this.instance.defaults.headers || {}),
         ...(params1.headers || {}),
         ...((params2 && params2.headers) || {}),
@@ -1003,7 +1003,7 @@ export class HttpClient<SecurityDataType = unknown> {
 export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDataType> {
   /**
  * @description Since: cosmos-sdk 0.46
- *
+ * 
  * @tags Service
  * @name ServiceAbciQuery
  * @summary ABCIQuery defines a query handler that supports ABCI queries directly to the

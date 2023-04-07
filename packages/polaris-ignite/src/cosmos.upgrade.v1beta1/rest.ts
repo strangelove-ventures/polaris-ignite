@@ -316,7 +316,7 @@ export class HttpClient<SecurityDataType = unknown> {
       ...params1,
       ...(params2 || {}),
       // @ts-expect-error force merge headers
-        headers: {
+      headers: {
         ...(this.instance.defaults.headers || {}),
         ...(params1.headers || {}),
         ...((params2 && params2.headers) || {}),
@@ -450,7 +450,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
 
   /**
  * No description
- *
+ * 
  * @tags Query
  * @name QueryUpgradedConsensusState
  * @summary UpgradedConsensusState queries the consensus state that will serve
