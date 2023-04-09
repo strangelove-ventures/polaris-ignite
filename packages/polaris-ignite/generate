@@ -6,5 +6,5 @@ rm -rf src/ &&
   ignite generate ts-client -o ../packages/polaris-ignite/src &&
   cd ../packages/polaris-ignite/src &&
   rm -rf package.json tsconfig.json types.d.ts &&
-  pnpm format &&
-  pnpm lint
+  pnpm tsx format.ts &&
+  pnpm eslint --fix "src/**/*.ts"

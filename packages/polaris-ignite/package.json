@@ -18,8 +18,8 @@
     "build": "pnpm build:src && pnpm build:types",
     "build:src": "tsup",
     "build:types": "tsc --project ./tsconfig.types.json",
-    "codemod": "tsx codemod.ts && pnpm format",
-    "format": "prettier --write \"src/**/*.ts\"",
+    "codemod": "tsx codemod.ts && tsx format.ts",
+    "format": "tsx format.ts",
     "generate": "bash generate",
     "lint": "eslint --fix \"src/**/*.ts\"",
     "prepublishOnly": "pnpm build"
@@ -28,7 +28,7 @@
     "@cosmjs/launchpad": "^0.27.1",
     "@cosmjs/proto-signing": "^0.30.1",
     "@cosmjs/stargate": "^0.30.1",
-    "axios": "^1.3.4",
+    "axios": "^1.3.5",
     "buffer": "^6.0.3",
     "events": "^3.3.0"
   },
