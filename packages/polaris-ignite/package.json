@@ -1,7 +1,7 @@
 {
   "name": "polaris-ignite",
   "description": "Interact with cosmos chains without the tears 😭",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "author": "Griko Nibras <griko@strange.love>",
   "repository": "https://github.com/strangelove-ventures/polaris-ignite.git",
   "homepage": "https://github.com/strangelove-ventures/polaris-ignite",
