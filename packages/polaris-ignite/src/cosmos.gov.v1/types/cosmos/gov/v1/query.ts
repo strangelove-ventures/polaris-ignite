@@ -167,7 +167,7 @@ export interface QueryTallyResultResponse {
   tally: TallyResult | undefined;
 }
 
-function createBaseQueryProposalRequest(): QueryProposalRequest {
+export function createBaseQueryProposalRequest(): QueryProposalRequest {
   return { proposalId: 0 };
 }
 
@@ -214,7 +214,7 @@ export const QueryProposalRequest = {
   },
 };
 
-function createBaseQueryProposalResponse(): QueryProposalResponse {
+export function createBaseQueryProposalResponse(): QueryProposalResponse {
   return { proposal: undefined };
 }
 
@@ -262,7 +262,7 @@ export const QueryProposalResponse = {
   },
 };
 
-function createBaseQueryProposalsRequest(): QueryProposalsRequest {
+export function createBaseQueryProposalsRequest(): QueryProposalsRequest {
   return { proposalStatus: 0, voter: "", depositor: "", pagination: undefined };
 }
 
@@ -342,7 +342,7 @@ export const QueryProposalsRequest = {
   },
 };
 
-function createBaseQueryProposalsResponse(): QueryProposalsResponse {
+export function createBaseQueryProposalsResponse(): QueryProposalsResponse {
   return { proposals: [], pagination: undefined };
 }
 
@@ -408,7 +408,7 @@ export const QueryProposalsResponse = {
   },
 };
 
-function createBaseQueryVoteRequest(): QueryVoteRequest {
+export function createBaseQueryVoteRequest(): QueryVoteRequest {
   return { proposalId: 0, voter: "" };
 }
 
@@ -466,7 +466,7 @@ export const QueryVoteRequest = {
   },
 };
 
-function createBaseQueryVoteResponse(): QueryVoteResponse {
+export function createBaseQueryVoteResponse(): QueryVoteResponse {
   return { vote: undefined };
 }
 
@@ -513,7 +513,7 @@ export const QueryVoteResponse = {
   },
 };
 
-function createBaseQueryVotesRequest(): QueryVotesRequest {
+export function createBaseQueryVotesRequest(): QueryVotesRequest {
   return { proposalId: 0, pagination: undefined };
 }
 
@@ -575,7 +575,7 @@ export const QueryVotesRequest = {
   },
 };
 
-function createBaseQueryVotesResponse(): QueryVotesResponse {
+export function createBaseQueryVotesResponse(): QueryVotesResponse {
   return { votes: [], pagination: undefined };
 }
 
@@ -641,7 +641,7 @@ export const QueryVotesResponse = {
   },
 };
 
-function createBaseQueryParamsRequest(): QueryParamsRequest {
+export function createBaseQueryParamsRequest(): QueryParamsRequest {
   return { paramsType: "" };
 }
 
@@ -688,7 +688,7 @@ export const QueryParamsRequest = {
   },
 };
 
-function createBaseQueryParamsResponse(): QueryParamsResponse {
+export function createBaseQueryParamsResponse(): QueryParamsResponse {
   return { votingParams: undefined, depositParams: undefined, tallyParams: undefined, params: undefined };
 }
 
@@ -777,7 +777,7 @@ export const QueryParamsResponse = {
   },
 };
 
-function createBaseQueryDepositRequest(): QueryDepositRequest {
+export function createBaseQueryDepositRequest(): QueryDepositRequest {
   return { proposalId: 0, depositor: "" };
 }
 
@@ -835,7 +835,7 @@ export const QueryDepositRequest = {
   },
 };
 
-function createBaseQueryDepositResponse(): QueryDepositResponse {
+export function createBaseQueryDepositResponse(): QueryDepositResponse {
   return { deposit: undefined };
 }
 
@@ -883,7 +883,7 @@ export const QueryDepositResponse = {
   },
 };
 
-function createBaseQueryDepositsRequest(): QueryDepositsRequest {
+export function createBaseQueryDepositsRequest(): QueryDepositsRequest {
   return { proposalId: 0, pagination: undefined };
 }
 
@@ -945,7 +945,7 @@ export const QueryDepositsRequest = {
   },
 };
 
-function createBaseQueryDepositsResponse(): QueryDepositsResponse {
+export function createBaseQueryDepositsResponse(): QueryDepositsResponse {
   return { deposits: [], pagination: undefined };
 }
 
@@ -1011,7 +1011,7 @@ export const QueryDepositsResponse = {
   },
 };
 
-function createBaseQueryTallyResultRequest(): QueryTallyResultRequest {
+export function createBaseQueryTallyResultRequest(): QueryTallyResultRequest {
   return { proposalId: 0 };
 }
 
@@ -1058,7 +1058,7 @@ export const QueryTallyResultRequest = {
   },
 };
 
-function createBaseQueryTallyResultResponse(): QueryTallyResultResponse {
+export function createBaseQueryTallyResultResponse(): QueryTallyResultResponse {
   return { tally: undefined };
 }
 
@@ -1188,14 +1188,15 @@ export class QueryClientImpl implements Query {
   }
 }
 
-interface Rpc {
+export interface Rpc {
   request(service: string, method: string, data: Uint8Array): Promise<Uint8Array>;
 }
 
-declare var self: any | undefined;
-declare var window: any | undefined;
-declare var global: any | undefined;
-var globalThis: any = (() => {
+export declare var self: any | undefined;
+export declare var window: any | undefined;
+export declare var global: any | undefined;
+
+export var globalThis: any = (() => {
   if (typeof globalThis !== "undefined") {
     return globalThis;
   }
@@ -1211,7 +1212,7 @@ var globalThis: any = (() => {
   throw "Unable to locate global object";
 })();
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
+export type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 export type DeepPartial<T> = T extends Builtin
   ? T
@@ -1223,12 +1224,12 @@ export type DeepPartial<T> = T extends Builtin
   ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
-type KeysOfUnion<T> = T extends T ? keyof T : never;
+export type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
 
-function longToNumber(long: Long): number {
+export function longToNumber(long: Long): number {
   if (long.gt(Number.MAX_SAFE_INTEGER)) {
     throw new globalThis.Error("Value is larger than Number.MAX_SAFE_INTEGER");
   }
@@ -1240,6 +1241,6 @@ if (_m0.util.Long !== Long) {
   _m0.configure();
 }
 
-function isSet(value: any): boolean {
+export function isSet(value: any): boolean {
   return value !== null && value !== undefined;
 }

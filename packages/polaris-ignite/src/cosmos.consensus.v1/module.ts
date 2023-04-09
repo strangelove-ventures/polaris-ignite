@@ -30,7 +30,7 @@ export interface Field {
   type: unknown;
 }
 
-const getStructure = (template) => {
+export const getStructure = (template) => {
   const structure: { fields: Field[] } = { fields: [] };
   for (const [key, value] of Object.entries(template)) {
     const field = { name: key, type: typeof value };
@@ -38,7 +38,8 @@ const getStructure = (template) => {
   }
   return structure;
 };
-const defaultFee = {
+
+export const defaultFee = {
   amount: [],
   gas: "200000",
 };
@@ -115,7 +116,7 @@ export class SDKModule {
   }
 }
 
-const Module = (test: IgniteClient) => {
+export const Module = (test: IgniteClient) => {
   return {
     module: {
       CosmosConsensusV1: new SDKModule(test),
@@ -123,4 +124,5 @@ const Module = (test: IgniteClient) => {
     registry: msgTypes,
   };
 };
+
 export default Module;

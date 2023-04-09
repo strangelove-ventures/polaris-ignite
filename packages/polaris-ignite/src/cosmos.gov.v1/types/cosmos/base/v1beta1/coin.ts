@@ -35,7 +35,7 @@ export interface DecProto {
   dec: string;
 }
 
-function createBaseCoin(): Coin {
+export function createBaseCoin(): Coin {
   return { denom: "", amount: "" };
 }
 
@@ -93,7 +93,7 @@ export const Coin = {
   },
 };
 
-function createBaseDecCoin(): DecCoin {
+export function createBaseDecCoin(): DecCoin {
   return { denom: "", amount: "" };
 }
 
@@ -151,7 +151,7 @@ export const DecCoin = {
   },
 };
 
-function createBaseIntProto(): IntProto {
+export function createBaseIntProto(): IntProto {
   return { int: "" };
 }
 
@@ -198,7 +198,7 @@ export const IntProto = {
   },
 };
 
-function createBaseDecProto(): DecProto {
+export function createBaseDecProto(): DecProto {
   return { dec: "" };
 }
 
@@ -245,7 +245,7 @@ export const DecProto = {
   },
 };
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
+export type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 export type DeepPartial<T> = T extends Builtin
   ? T
@@ -257,11 +257,11 @@ export type DeepPartial<T> = T extends Builtin
   ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
-type KeysOfUnion<T> = T extends T ? keyof T : never;
+export type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
 
-function isSet(value: any): boolean {
+export function isSet(value: any): boolean {
   return value !== null && value !== undefined;
 }

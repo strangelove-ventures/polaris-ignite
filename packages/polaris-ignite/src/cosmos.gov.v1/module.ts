@@ -19,9 +19,9 @@ import { VotingParams as typeVotingParams } from "./types";
 import { TallyParams as typeTallyParams } from "./types";
 import { Params as typeParams } from "./types";
 import { MsgVote } from "./types/cosmos/gov/v1/tx";
-import { MsgDeposit } from "./types/cosmos/gov/v1/tx";
-import { MsgVoteWeighted } from "./types/cosmos/gov/v1/tx";
 import { MsgSubmitProposal } from "./types/cosmos/gov/v1/tx";
+import { MsgVoteWeighted } from "./types/cosmos/gov/v1/tx";
+import { MsgDeposit } from "./types/cosmos/gov/v1/tx";
 import { MsgUpdateParams } from "./types/cosmos/gov/v1/tx";
 
 export { MsgDeposit, MsgSubmitProposal, MsgUpdateParams, MsgVote, MsgVoteWeighted };
@@ -32,8 +32,8 @@ export interface sendMsgVoteParams {
   memo?: string;
 }
 
-export interface sendMsgDepositParams {
-  value: MsgDeposit;
+export interface sendMsgSubmitProposalParams {
+  value: MsgSubmitProposal;
   fee?: StdFee;
   memo?: string;
 }
@@ -44,8 +44,8 @@ export interface sendMsgVoteWeightedParams {
   memo?: string;
 }
 
-export interface sendMsgSubmitProposalParams {
-  value: MsgSubmitProposal;
+export interface sendMsgDepositParams {
+  value: MsgDeposit;
   fee?: StdFee;
   memo?: string;
 }
@@ -60,16 +60,16 @@ export interface msgVoteParams {
   value: MsgVote;
 }
 
-export interface msgDepositParams {
-  value: MsgDeposit;
+export interface msgSubmitProposalParams {
+  value: MsgSubmitProposal;
 }
 
 export interface msgVoteWeightedParams {
   value: MsgVoteWeighted;
 }
 
-export interface msgSubmitProposalParams {
-  value: MsgSubmitProposal;
+export interface msgDepositParams {
+  value: MsgDeposit;
 }
 
 export interface msgUpdateParamsParams {
@@ -83,7 +83,7 @@ export interface Field {
   type: unknown;
 }
 
-const getStructure = (template) => {
+export const getStructure = (template) => {
   const structure: { fields: Field[] } = { fields: [] };
   for (const [key, value] of Object.entries(template)) {
     const field = { name: key, type: typeof value };
@@ -91,7 +91,8 @@ const getStructure = (template) => {
   }
   return structure;
 };
-const defaultFee = {
+
+export const defaultFee = {
   amount: [],
   gas: "200000",
 };
@@ -122,19 +123,19 @@ export const txClient = (
       }
     },
 
-    async sendMsgDeposit({ value, fee, memo }: sendMsgDepositParams): Promise<DeliverTxResponse> {
+    async sendMsgSubmitProposal({ value, fee, memo }: sendMsgSubmitProposalParams): Promise<DeliverTxResponse> {
       if (!signer) {
-        throw new Error("TxClient:sendMsgDeposit: Unable to sign Tx. Signer is not present.");
+        throw new Error("TxClient:sendMsgSubmitProposal: Unable to sign Tx. Signer is not present.");
       }
       try {
         const { address } = (await signer.getAccounts())[0];
         const signingClient = await SigningStargateClient.connectWithSigner(addr, signer, {
           registry,
         });
-        const msg = this.msgDeposit({ value: MsgDeposit.fromPartial(value) });
+        const msg = this.msgSubmitProposal({ value: MsgSubmitProposal.fromPartial(value) });
         return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo);
       } catch (e: any) {
-        throw new Error(`TxClient:sendMsgDeposit: Could not broadcast Tx: ${e.message}`);
+        throw new Error(`TxClient:sendMsgSubmitProposal: Could not broadcast Tx: ${e.message}`);
       }
     },
 
@@ -154,19 +155,19 @@ export const txClient = (
       }
     },
 
-    async sendMsgSubmitProposal({ value, fee, memo }: sendMsgSubmitProposalParams): Promise<DeliverTxResponse> {
+    async sendMsgDeposit({ value, fee, memo }: sendMsgDepositParams): Promise<DeliverTxResponse> {
       if (!signer) {
-        throw new Error("TxClient:sendMsgSubmitProposal: Unable to sign Tx. Signer is not present.");
+        throw new Error("TxClient:sendMsgDeposit: Unable to sign Tx. Signer is not present.");
       }
       try {
         const { address } = (await signer.getAccounts())[0];
         const signingClient = await SigningStargateClient.connectWithSigner(addr, signer, {
           registry,
         });
-        const msg = this.msgSubmitProposal({ value: MsgSubmitProposal.fromPartial(value) });
+        const msg = this.msgDeposit({ value: MsgDeposit.fromPartial(value) });
         return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo);
       } catch (e: any) {
-        throw new Error(`TxClient:sendMsgSubmitProposal: Could not broadcast Tx: ${e.message}`);
+        throw new Error(`TxClient:sendMsgDeposit: Could not broadcast Tx: ${e.message}`);
       }
     },
 
@@ -194,11 +195,11 @@ export const txClient = (
       }
     },
 
-    msgDeposit: ({ value }: msgDepositParams): EncodeObject => {
+    msgSubmitProposal: ({ value }: msgSubmitProposalParams): EncodeObject => {
       try {
-        return { typeUrl: "/cosmos.gov.v1.MsgDeposit", value: MsgDeposit.fromPartial(value) };
+        return { typeUrl: "/cosmos.gov.v1.MsgSubmitProposal", value: MsgSubmitProposal.fromPartial(value) };
       } catch (e: any) {
-        throw new Error(`TxClient:MsgDeposit: Could not create message: ${e.message}`);
+        throw new Error(`TxClient:MsgSubmitProposal: Could not create message: ${e.message}`);
       }
     },
 
@@ -210,11 +211,11 @@ export const txClient = (
       }
     },
 
-    msgSubmitProposal: ({ value }: msgSubmitProposalParams): EncodeObject => {
+    msgDeposit: ({ value }: msgDepositParams): EncodeObject => {
       try {
-        return { typeUrl: "/cosmos.gov.v1.MsgSubmitProposal", value: MsgSubmitProposal.fromPartial(value) };
+        return { typeUrl: "/cosmos.gov.v1.MsgDeposit", value: MsgDeposit.fromPartial(value) };
       } catch (e: any) {
-        throw new Error(`TxClient:MsgSubmitProposal: Could not create message: ${e.message}`);
+        throw new Error(`TxClient:MsgDeposit: Could not create message: ${e.message}`);
       }
     },
 
@@ -274,7 +275,7 @@ export class SDKModule {
   }
 }
 
-const Module = (test: IgniteClient) => {
+export const Module = (test: IgniteClient) => {
   return {
     module: {
       CosmosGovV1: new SDKModule(test),
@@ -282,4 +283,5 @@ const Module = (test: IgniteClient) => {
     registry: msgTypes,
   };
 };
+
 export default Module;

@@ -52,7 +52,7 @@ export interface Header {
   proposerAddress: string;
 }
 
-function createBaseBlock(): Block {
+export function createBaseBlock(): Block {
   return { header: undefined, data: undefined, evidence: undefined, lastCommit: undefined };
 }
 
@@ -133,7 +133,7 @@ export const Block = {
   },
 };
 
-function createBaseHeader(): Header {
+export function createBaseHeader(): Header {
   return {
     version: undefined,
     chainId: "",
@@ -341,10 +341,11 @@ export const Header = {
   },
 };
 
-declare var self: any | undefined;
-declare var window: any | undefined;
-declare var global: any | undefined;
-var globalThis: any = (() => {
+export declare var self: any | undefined;
+export declare var window: any | undefined;
+export declare var global: any | undefined;
+
+export var globalThis: any = (() => {
   if (typeof globalThis !== "undefined") {
     return globalThis;
   }
@@ -360,7 +361,7 @@ var globalThis: any = (() => {
   throw "Unable to locate global object";
 })();
 
-function bytesFromBase64(b64: string): Uint8Array {
+export function bytesFromBase64(b64: string): Uint8Array {
   if (globalThis.Buffer) {
     return Uint8Array.from(globalThis.Buffer.from(b64, "base64"));
   } else {
@@ -373,7 +374,7 @@ function bytesFromBase64(b64: string): Uint8Array {
   }
 }
 
-function base64FromBytes(arr: Uint8Array): string {
+export function base64FromBytes(arr: Uint8Array): string {
   if (globalThis.Buffer) {
     return globalThis.Buffer.from(arr).toString("base64");
   } else {
@@ -385,7 +386,7 @@ function base64FromBytes(arr: Uint8Array): string {
   }
 }
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
+export type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 export type DeepPartial<T> = T extends Builtin
   ? T
@@ -397,24 +398,24 @@ export type DeepPartial<T> = T extends Builtin
   ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
-type KeysOfUnion<T> = T extends T ? keyof T : never;
+export type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
 
-function toTimestamp(date: Date): Timestamp {
+export function toTimestamp(date: Date): Timestamp {
   const seconds = date.getTime() / 1_000;
   const nanos = (date.getTime() % 1_000) * 1_000_000;
   return { seconds, nanos };
 }
 
-function fromTimestamp(t: Timestamp): Date {
+export function fromTimestamp(t: Timestamp): Date {
   let millis = t.seconds * 1_000;
   millis += t.nanos / 1_000_000;
   return new Date(millis);
 }
 
-function fromJsonTimestamp(o: any): Date {
+export function fromJsonTimestamp(o: any): Date {
   if (o instanceof Date) {
     return o;
   } else if (typeof o === "string") {
@@ -424,7 +425,7 @@ function fromJsonTimestamp(o: any): Date {
   }
 }
 
-function longToNumber(long: Long): number {
+export function longToNumber(long: Long): number {
   if (long.gt(Number.MAX_SAFE_INTEGER)) {
     throw new globalThis.Error("Value is larger than Number.MAX_SAFE_INTEGER");
   }
@@ -436,6 +437,6 @@ if (_m0.util.Long !== Long) {
   _m0.configure();
 }
 
-function isSet(value: any): boolean {
+export function isSet(value: any): boolean {
   return value !== null && value !== undefined;
 }

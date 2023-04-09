@@ -36,7 +36,7 @@ export interface MsgUpdateParams {
  */
 export interface MsgUpdateParamsResponse {}
 
-function createBaseMsgUnjail(): MsgUnjail {
+export function createBaseMsgUnjail(): MsgUnjail {
   return { validatorAddr: "" };
 }
 
@@ -83,7 +83,7 @@ export const MsgUnjail = {
   },
 };
 
-function createBaseMsgUnjailResponse(): MsgUnjailResponse {
+export function createBaseMsgUnjailResponse(): MsgUnjailResponse {
   return {};
 }
 
@@ -122,7 +122,7 @@ export const MsgUnjailResponse = {
   },
 };
 
-function createBaseMsgUpdateParams(): MsgUpdateParams {
+export function createBaseMsgUpdateParams(): MsgUpdateParams {
   return { authority: "", params: undefined };
 }
 
@@ -181,7 +181,7 @@ export const MsgUpdateParams = {
   },
 };
 
-function createBaseMsgUpdateParamsResponse(): MsgUpdateParamsResponse {
+export function createBaseMsgUpdateParamsResponse(): MsgUpdateParamsResponse {
   return {};
 }
 
@@ -257,11 +257,11 @@ export class MsgClientImpl implements Msg {
   }
 }
 
-interface Rpc {
+export interface Rpc {
   request(service: string, method: string, data: Uint8Array): Promise<Uint8Array>;
 }
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
+export type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 export type DeepPartial<T> = T extends Builtin
   ? T
@@ -273,11 +273,11 @@ export type DeepPartial<T> = T extends Builtin
   ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
-type KeysOfUnion<T> = T extends T ? keyof T : never;
+export type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
 
-function isSet(value: any): boolean {
+export function isSet(value: any): boolean {
   return value !== null && value !== undefined;
 }

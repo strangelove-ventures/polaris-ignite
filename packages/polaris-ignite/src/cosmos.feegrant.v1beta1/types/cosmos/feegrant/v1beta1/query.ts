@@ -59,7 +59,7 @@ export interface QueryAllowancesByGranterResponse {
   pagination: PageResponse | undefined;
 }
 
-function createBaseQueryAllowanceRequest(): QueryAllowanceRequest {
+export function createBaseQueryAllowanceRequest(): QueryAllowanceRequest {
   return { granter: "", grantee: "" };
 }
 
@@ -117,7 +117,7 @@ export const QueryAllowanceRequest = {
   },
 };
 
-function createBaseQueryAllowanceResponse(): QueryAllowanceResponse {
+export function createBaseQueryAllowanceResponse(): QueryAllowanceResponse {
   return { allowance: undefined };
 }
 
@@ -166,7 +166,7 @@ export const QueryAllowanceResponse = {
   },
 };
 
-function createBaseQueryAllowancesRequest(): QueryAllowancesRequest {
+export function createBaseQueryAllowancesRequest(): QueryAllowancesRequest {
   return { grantee: "", pagination: undefined };
 }
 
@@ -228,7 +228,7 @@ export const QueryAllowancesRequest = {
   },
 };
 
-function createBaseQueryAllowancesResponse(): QueryAllowancesResponse {
+export function createBaseQueryAllowancesResponse(): QueryAllowancesResponse {
   return { allowances: [], pagination: undefined };
 }
 
@@ -294,7 +294,7 @@ export const QueryAllowancesResponse = {
   },
 };
 
-function createBaseQueryAllowancesByGranterRequest(): QueryAllowancesByGranterRequest {
+export function createBaseQueryAllowancesByGranterRequest(): QueryAllowancesByGranterRequest {
   return { granter: "", pagination: undefined };
 }
 
@@ -358,7 +358,7 @@ export const QueryAllowancesByGranterRequest = {
   },
 };
 
-function createBaseQueryAllowancesByGranterResponse(): QueryAllowancesByGranterResponse {
+export function createBaseQueryAllowancesByGranterResponse(): QueryAllowancesByGranterResponse {
   return { allowances: [], pagination: undefined };
 }
 
@@ -467,11 +467,11 @@ export class QueryClientImpl implements Query {
   }
 }
 
-interface Rpc {
+export interface Rpc {
   request(service: string, method: string, data: Uint8Array): Promise<Uint8Array>;
 }
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
+export type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 export type DeepPartial<T> = T extends Builtin
   ? T
@@ -483,11 +483,11 @@ export type DeepPartial<T> = T extends Builtin
   ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
-type KeysOfUnion<T> = T extends T ? keyof T : never;
+export type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
 
-function isSet(value: any): boolean {
+export function isSet(value: any): boolean {
   return value !== null && value !== undefined;
 }

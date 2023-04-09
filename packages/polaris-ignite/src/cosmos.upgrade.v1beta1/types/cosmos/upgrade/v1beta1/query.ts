@@ -105,7 +105,7 @@ export interface QueryAuthorityResponse {
   address: string;
 }
 
-function createBaseQueryCurrentPlanRequest(): QueryCurrentPlanRequest {
+export function createBaseQueryCurrentPlanRequest(): QueryCurrentPlanRequest {
   return {};
 }
 
@@ -144,7 +144,7 @@ export const QueryCurrentPlanRequest = {
   },
 };
 
-function createBaseQueryCurrentPlanResponse(): QueryCurrentPlanResponse {
+export function createBaseQueryCurrentPlanResponse(): QueryCurrentPlanResponse {
   return { plan: undefined };
 }
 
@@ -191,7 +191,7 @@ export const QueryCurrentPlanResponse = {
   },
 };
 
-function createBaseQueryAppliedPlanRequest(): QueryAppliedPlanRequest {
+export function createBaseQueryAppliedPlanRequest(): QueryAppliedPlanRequest {
   return { name: "" };
 }
 
@@ -238,7 +238,7 @@ export const QueryAppliedPlanRequest = {
   },
 };
 
-function createBaseQueryAppliedPlanResponse(): QueryAppliedPlanResponse {
+export function createBaseQueryAppliedPlanResponse(): QueryAppliedPlanResponse {
   return { height: 0 };
 }
 
@@ -285,7 +285,7 @@ export const QueryAppliedPlanResponse = {
   },
 };
 
-function createBaseQueryUpgradedConsensusStateRequest(): QueryUpgradedConsensusStateRequest {
+export function createBaseQueryUpgradedConsensusStateRequest(): QueryUpgradedConsensusStateRequest {
   return { lastHeight: 0 };
 }
 
@@ -334,7 +334,7 @@ export const QueryUpgradedConsensusStateRequest = {
   },
 };
 
-function createBaseQueryUpgradedConsensusStateResponse(): QueryUpgradedConsensusStateResponse {
+export function createBaseQueryUpgradedConsensusStateResponse(): QueryUpgradedConsensusStateResponse {
   return { upgradedConsensusState: new Uint8Array() };
 }
 
@@ -390,7 +390,7 @@ export const QueryUpgradedConsensusStateResponse = {
   },
 };
 
-function createBaseQueryModuleVersionsRequest(): QueryModuleVersionsRequest {
+export function createBaseQueryModuleVersionsRequest(): QueryModuleVersionsRequest {
   return { moduleName: "" };
 }
 
@@ -437,7 +437,7 @@ export const QueryModuleVersionsRequest = {
   },
 };
 
-function createBaseQueryModuleVersionsResponse(): QueryModuleVersionsResponse {
+export function createBaseQueryModuleVersionsResponse(): QueryModuleVersionsResponse {
   return { moduleVersions: [] };
 }
 
@@ -492,7 +492,7 @@ export const QueryModuleVersionsResponse = {
   },
 };
 
-function createBaseQueryAuthorityRequest(): QueryAuthorityRequest {
+export function createBaseQueryAuthorityRequest(): QueryAuthorityRequest {
   return {};
 }
 
@@ -531,7 +531,7 @@ export const QueryAuthorityRequest = {
   },
 };
 
-function createBaseQueryAuthorityResponse(): QueryAuthorityResponse {
+export function createBaseQueryAuthorityResponse(): QueryAuthorityResponse {
   return { address: "" };
 }
 
@@ -650,14 +650,15 @@ export class QueryClientImpl implements Query {
   }
 }
 
-interface Rpc {
+export interface Rpc {
   request(service: string, method: string, data: Uint8Array): Promise<Uint8Array>;
 }
 
-declare var self: any | undefined;
-declare var window: any | undefined;
-declare var global: any | undefined;
-var globalThis: any = (() => {
+export declare var self: any | undefined;
+export declare var window: any | undefined;
+export declare var global: any | undefined;
+
+export var globalThis: any = (() => {
   if (typeof globalThis !== "undefined") {
     return globalThis;
   }
@@ -673,7 +674,7 @@ var globalThis: any = (() => {
   throw "Unable to locate global object";
 })();
 
-function bytesFromBase64(b64: string): Uint8Array {
+export function bytesFromBase64(b64: string): Uint8Array {
   if (globalThis.Buffer) {
     return Uint8Array.from(globalThis.Buffer.from(b64, "base64"));
   } else {
@@ -686,7 +687,7 @@ function bytesFromBase64(b64: string): Uint8Array {
   }
 }
 
-function base64FromBytes(arr: Uint8Array): string {
+export function base64FromBytes(arr: Uint8Array): string {
   if (globalThis.Buffer) {
     return globalThis.Buffer.from(arr).toString("base64");
   } else {
@@ -698,7 +699,7 @@ function base64FromBytes(arr: Uint8Array): string {
   }
 }
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
+export type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 export type DeepPartial<T> = T extends Builtin
   ? T
@@ -710,12 +711,12 @@ export type DeepPartial<T> = T extends Builtin
   ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
-type KeysOfUnion<T> = T extends T ? keyof T : never;
+export type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
 
-function longToNumber(long: Long): number {
+export function longToNumber(long: Long): number {
   if (long.gt(Number.MAX_SAFE_INTEGER)) {
     throw new globalThis.Error("Value is larger than Number.MAX_SAFE_INTEGER");
   }
@@ -727,6 +728,6 @@ if (_m0.util.Long !== Long) {
   _m0.configure();
 }
 
-function isSet(value: any): boolean {
+export function isSet(value: any): boolean {
   return value !== null && value !== undefined;
 }

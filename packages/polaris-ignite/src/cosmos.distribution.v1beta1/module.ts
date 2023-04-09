@@ -31,9 +31,9 @@ import { ValidatorSlashEventRecord as typeValidatorSlashEventRecord } from "./ty
 import { MsgUpdateParams } from "./types/cosmos/distribution/v1beta1/tx";
 import { MsgSetWithdrawAddress } from "./types/cosmos/distribution/v1beta1/tx";
 import { MsgFundCommunityPool } from "./types/cosmos/distribution/v1beta1/tx";
+import { MsgWithdrawDelegatorReward } from "./types/cosmos/distribution/v1beta1/tx";
 import { MsgWithdrawValidatorCommission } from "./types/cosmos/distribution/v1beta1/tx";
 import { MsgCommunityPoolSpend } from "./types/cosmos/distribution/v1beta1/tx";
-import { MsgWithdrawDelegatorReward } from "./types/cosmos/distribution/v1beta1/tx";
 
 export {
   MsgCommunityPoolSpend,
@@ -62,6 +62,12 @@ export interface sendMsgFundCommunityPoolParams {
   memo?: string;
 }
 
+export interface sendMsgWithdrawDelegatorRewardParams {
+  value: MsgWithdrawDelegatorReward;
+  fee?: StdFee;
+  memo?: string;
+}
+
 export interface sendMsgWithdrawValidatorCommissionParams {
   value: MsgWithdrawValidatorCommission;
   fee?: StdFee;
@@ -70,12 +76,6 @@ export interface sendMsgWithdrawValidatorCommissionParams {
 
 export interface sendMsgCommunityPoolSpendParams {
   value: MsgCommunityPoolSpend;
-  fee?: StdFee;
-  memo?: string;
-}
-
-export interface sendMsgWithdrawDelegatorRewardParams {
-  value: MsgWithdrawDelegatorReward;
   fee?: StdFee;
   memo?: string;
 }
@@ -92,16 +92,16 @@ export interface msgFundCommunityPoolParams {
   value: MsgFundCommunityPool;
 }
 
+export interface msgWithdrawDelegatorRewardParams {
+  value: MsgWithdrawDelegatorReward;
+}
+
 export interface msgWithdrawValidatorCommissionParams {
   value: MsgWithdrawValidatorCommission;
 }
 
 export interface msgCommunityPoolSpendParams {
   value: MsgCommunityPoolSpend;
-}
-
-export interface msgWithdrawDelegatorRewardParams {
-  value: MsgWithdrawDelegatorReward;
 }
 
 export const registry = new Registry(msgTypes);
@@ -111,7 +111,7 @@ export interface Field {
   type: unknown;
 }
 
-const getStructure = (template) => {
+export const getStructure = (template) => {
   const structure: { fields: Field[] } = { fields: [] };
   for (const [key, value] of Object.entries(template)) {
     const field = { name: key, type: typeof value };
@@ -119,7 +119,8 @@ const getStructure = (template) => {
   }
   return structure;
 };
-const defaultFee = {
+
+export const defaultFee = {
   amount: [],
   gas: "200000",
 };
@@ -182,6 +183,26 @@ export const txClient = (
       }
     },
 
+    async sendMsgWithdrawDelegatorReward({
+      value,
+      fee,
+      memo,
+    }: sendMsgWithdrawDelegatorRewardParams): Promise<DeliverTxResponse> {
+      if (!signer) {
+        throw new Error("TxClient:sendMsgWithdrawDelegatorReward: Unable to sign Tx. Signer is not present.");
+      }
+      try {
+        const { address } = (await signer.getAccounts())[0];
+        const signingClient = await SigningStargateClient.connectWithSigner(addr, signer, {
+          registry,
+        });
+        const msg = this.msgWithdrawDelegatorReward({ value: MsgWithdrawDelegatorReward.fromPartial(value) });
+        return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo);
+      } catch (e: any) {
+        throw new Error(`TxClient:sendMsgWithdrawDelegatorReward: Could not broadcast Tx: ${e.message}`);
+      }
+    },
+
     async sendMsgWithdrawValidatorCommission({
       value,
       fee,
@@ -218,26 +239,6 @@ export const txClient = (
       }
     },
 
-    async sendMsgWithdrawDelegatorReward({
-      value,
-      fee,
-      memo,
-    }: sendMsgWithdrawDelegatorRewardParams): Promise<DeliverTxResponse> {
-      if (!signer) {
-        throw new Error("TxClient:sendMsgWithdrawDelegatorReward: Unable to sign Tx. Signer is not present.");
-      }
-      try {
-        const { address } = (await signer.getAccounts())[0];
-        const signingClient = await SigningStargateClient.connectWithSigner(addr, signer, {
-          registry,
-        });
-        const msg = this.msgWithdrawDelegatorReward({ value: MsgWithdrawDelegatorReward.fromPartial(value) });
-        return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo);
-      } catch (e: any) {
-        throw new Error(`TxClient:sendMsgWithdrawDelegatorReward: Could not broadcast Tx: ${e.message}`);
-      }
-    },
-
     msgUpdateParams: ({ value }: msgUpdateParamsParams): EncodeObject => {
       try {
         return { typeUrl: "/cosmos.distribution.v1beta1.MsgUpdateParams", value: MsgUpdateParams.fromPartial(value) };
@@ -268,6 +269,17 @@ export const txClient = (
       }
     },
 
+    msgWithdrawDelegatorReward: ({ value }: msgWithdrawDelegatorRewardParams): EncodeObject => {
+      try {
+        return {
+          typeUrl: "/cosmos.distribution.v1beta1.MsgWithdrawDelegatorReward",
+          value: MsgWithdrawDelegatorReward.fromPartial(value),
+        };
+      } catch (e: any) {
+        throw new Error(`TxClient:MsgWithdrawDelegatorReward: Could not create message: ${e.message}`);
+      }
+    },
+
     msgWithdrawValidatorCommission: ({ value }: msgWithdrawValidatorCommissionParams): EncodeObject => {
       try {
         return {
@@ -287,17 +299,6 @@ export const txClient = (
         };
       } catch (e: any) {
         throw new Error(`TxClient:MsgCommunityPoolSpend: Could not create message: ${e.message}`);
-      }
-    },
-
-    msgWithdrawDelegatorReward: ({ value }: msgWithdrawDelegatorRewardParams): EncodeObject => {
-      try {
-        return {
-          typeUrl: "/cosmos.distribution.v1beta1.MsgWithdrawDelegatorReward",
-          value: MsgWithdrawDelegatorReward.fromPartial(value),
-        };
-      } catch (e: any) {
-        throw new Error(`TxClient:MsgWithdrawDelegatorReward: Could not create message: ${e.message}`);
       }
     },
   };
@@ -359,7 +360,7 @@ export class SDKModule {
   }
 }
 
-const Module = (test: IgniteClient) => {
+export const Module = (test: IgniteClient) => {
   return {
     module: {
       CosmosDistributionV1Beta1: new SDKModule(test),
@@ -367,4 +368,5 @@ const Module = (test: IgniteClient) => {
     registry: msgTypes,
   };
 };
+
 export default Module;

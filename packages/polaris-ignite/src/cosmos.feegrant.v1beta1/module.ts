@@ -13,16 +13,10 @@ import { BasicAllowance as typeBasicAllowance } from "./types";
 import { PeriodicAllowance as typePeriodicAllowance } from "./types";
 import { AllowedMsgAllowance as typeAllowedMsgAllowance } from "./types";
 import { Grant as typeGrant } from "./types";
-import { MsgGrantAllowance } from "./types/cosmos/feegrant/v1beta1/tx";
 import { MsgRevokeAllowance } from "./types/cosmos/feegrant/v1beta1/tx";
+import { MsgGrantAllowance } from "./types/cosmos/feegrant/v1beta1/tx";
 
 export { MsgGrantAllowance, MsgRevokeAllowance };
-
-export interface sendMsgGrantAllowanceParams {
-  value: MsgGrantAllowance;
-  fee?: StdFee;
-  memo?: string;
-}
 
 export interface sendMsgRevokeAllowanceParams {
   value: MsgRevokeAllowance;
@@ -30,12 +24,18 @@ export interface sendMsgRevokeAllowanceParams {
   memo?: string;
 }
 
-export interface msgGrantAllowanceParams {
+export interface sendMsgGrantAllowanceParams {
   value: MsgGrantAllowance;
+  fee?: StdFee;
+  memo?: string;
 }
 
 export interface msgRevokeAllowanceParams {
   value: MsgRevokeAllowance;
+}
+
+export interface msgGrantAllowanceParams {
+  value: MsgGrantAllowance;
 }
 
 export const registry = new Registry(msgTypes);
@@ -45,7 +45,7 @@ export interface Field {
   type: unknown;
 }
 
-const getStructure = (template) => {
+export const getStructure = (template) => {
   const structure: { fields: Field[] } = { fields: [] };
   for (const [key, value] of Object.entries(template)) {
     const field = { name: key, type: typeof value };
@@ -53,7 +53,8 @@ const getStructure = (template) => {
   }
   return structure;
 };
-const defaultFee = {
+
+export const defaultFee = {
   amount: [],
   gas: "200000",
 };
@@ -68,22 +69,6 @@ export const txClient = (
   { signer, prefix, addr }: TxClientOptions = { addr: "http://localhost:26657", prefix: "cosmos" },
 ) => {
   return {
-    async sendMsgGrantAllowance({ value, fee, memo }: sendMsgGrantAllowanceParams): Promise<DeliverTxResponse> {
-      if (!signer) {
-        throw new Error("TxClient:sendMsgGrantAllowance: Unable to sign Tx. Signer is not present.");
-      }
-      try {
-        const { address } = (await signer.getAccounts())[0];
-        const signingClient = await SigningStargateClient.connectWithSigner(addr, signer, {
-          registry,
-        });
-        const msg = this.msgGrantAllowance({ value: MsgGrantAllowance.fromPartial(value) });
-        return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo);
-      } catch (e: any) {
-        throw new Error(`TxClient:sendMsgGrantAllowance: Could not broadcast Tx: ${e.message}`);
-      }
-    },
-
     async sendMsgRevokeAllowance({ value, fee, memo }: sendMsgRevokeAllowanceParams): Promise<DeliverTxResponse> {
       if (!signer) {
         throw new Error("TxClient:sendMsgRevokeAllowance: Unable to sign Tx. Signer is not present.");
@@ -100,11 +85,19 @@ export const txClient = (
       }
     },
 
-    msgGrantAllowance: ({ value }: msgGrantAllowanceParams): EncodeObject => {
+    async sendMsgGrantAllowance({ value, fee, memo }: sendMsgGrantAllowanceParams): Promise<DeliverTxResponse> {
+      if (!signer) {
+        throw new Error("TxClient:sendMsgGrantAllowance: Unable to sign Tx. Signer is not present.");
+      }
       try {
-        return { typeUrl: "/cosmos.feegrant.v1beta1.MsgGrantAllowance", value: MsgGrantAllowance.fromPartial(value) };
+        const { address } = (await signer.getAccounts())[0];
+        const signingClient = await SigningStargateClient.connectWithSigner(addr, signer, {
+          registry,
+        });
+        const msg = this.msgGrantAllowance({ value: MsgGrantAllowance.fromPartial(value) });
+        return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo);
       } catch (e: any) {
-        throw new Error(`TxClient:MsgGrantAllowance: Could not create message: ${e.message}`);
+        throw new Error(`TxClient:sendMsgGrantAllowance: Could not broadcast Tx: ${e.message}`);
       }
     },
 
@@ -113,6 +106,14 @@ export const txClient = (
         return { typeUrl: "/cosmos.feegrant.v1beta1.MsgRevokeAllowance", value: MsgRevokeAllowance.fromPartial(value) };
       } catch (e: any) {
         throw new Error(`TxClient:MsgRevokeAllowance: Could not create message: ${e.message}`);
+      }
+    },
+
+    msgGrantAllowance: ({ value }: msgGrantAllowanceParams): EncodeObject => {
+      try {
+        return { typeUrl: "/cosmos.feegrant.v1beta1.MsgGrantAllowance", value: MsgGrantAllowance.fromPartial(value) };
+      } catch (e: any) {
+        throw new Error(`TxClient:MsgGrantAllowance: Could not create message: ${e.message}`);
       }
     },
   };
@@ -159,7 +160,7 @@ export class SDKModule {
   }
 }
 
-const Module = (test: IgniteClient) => {
+export const Module = (test: IgniteClient) => {
   return {
     module: {
       CosmosFeegrantV1Beta1: new SDKModule(test),
@@ -167,4 +168,5 @@ const Module = (test: IgniteClient) => {
     registry: msgTypes,
   };
 };
+
 export default Module;

@@ -335,7 +335,7 @@ export interface TxDecodeAminoResponse {
   aminoJson: string;
 }
 
-function createBaseGetTxsEventRequest(): GetTxsEventRequest {
+export function createBaseGetTxsEventRequest(): GetTxsEventRequest {
   return { events: [], pagination: undefined, orderBy: 0, page: 0, limit: 0 };
 }
 
@@ -428,7 +428,7 @@ export const GetTxsEventRequest = {
   },
 };
 
-function createBaseGetTxsEventResponse(): GetTxsEventResponse {
+export function createBaseGetTxsEventResponse(): GetTxsEventResponse {
   return { txs: [], txResponses: [], pagination: undefined, total: 0 };
 }
 
@@ -516,7 +516,7 @@ export const GetTxsEventResponse = {
   },
 };
 
-function createBaseBroadcastTxRequest(): BroadcastTxRequest {
+export function createBaseBroadcastTxRequest(): BroadcastTxRequest {
   return { txBytes: new Uint8Array(), mode: 0 };
 }
 
@@ -575,7 +575,7 @@ export const BroadcastTxRequest = {
   },
 };
 
-function createBaseBroadcastTxResponse(): BroadcastTxResponse {
+export function createBaseBroadcastTxResponse(): BroadcastTxResponse {
   return { txResponse: undefined };
 }
 
@@ -626,7 +626,7 @@ export const BroadcastTxResponse = {
   },
 };
 
-function createBaseSimulateRequest(): SimulateRequest {
+export function createBaseSimulateRequest(): SimulateRequest {
   return { tx: undefined, txBytes: new Uint8Array() };
 }
 
@@ -685,7 +685,7 @@ export const SimulateRequest = {
   },
 };
 
-function createBaseSimulateResponse(): SimulateResponse {
+export function createBaseSimulateResponse(): SimulateResponse {
   return { gasInfo: undefined, result: undefined };
 }
 
@@ -745,7 +745,7 @@ export const SimulateResponse = {
   },
 };
 
-function createBaseGetTxRequest(): GetTxRequest {
+export function createBaseGetTxRequest(): GetTxRequest {
   return { hash: "" };
 }
 
@@ -792,7 +792,7 @@ export const GetTxRequest = {
   },
 };
 
-function createBaseGetTxResponse(): GetTxResponse {
+export function createBaseGetTxResponse(): GetTxResponse {
   return { tx: undefined, txResponse: undefined };
 }
 
@@ -854,7 +854,7 @@ export const GetTxResponse = {
   },
 };
 
-function createBaseGetBlockWithTxsRequest(): GetBlockWithTxsRequest {
+export function createBaseGetBlockWithTxsRequest(): GetBlockWithTxsRequest {
   return { height: 0, pagination: undefined };
 }
 
@@ -916,7 +916,7 @@ export const GetBlockWithTxsRequest = {
   },
 };
 
-function createBaseGetBlockWithTxsResponse(): GetBlockWithTxsResponse {
+export function createBaseGetBlockWithTxsResponse(): GetBlockWithTxsResponse {
   return { txs: [], blockId: undefined, block: undefined, pagination: undefined };
 }
 
@@ -1001,7 +1001,7 @@ export const GetBlockWithTxsResponse = {
   },
 };
 
-function createBaseTxDecodeRequest(): TxDecodeRequest {
+export function createBaseTxDecodeRequest(): TxDecodeRequest {
   return { txBytes: new Uint8Array() };
 }
 
@@ -1049,7 +1049,7 @@ export const TxDecodeRequest = {
   },
 };
 
-function createBaseTxDecodeResponse(): TxDecodeResponse {
+export function createBaseTxDecodeResponse(): TxDecodeResponse {
   return { tx: undefined };
 }
 
@@ -1096,7 +1096,7 @@ export const TxDecodeResponse = {
   },
 };
 
-function createBaseTxEncodeRequest(): TxEncodeRequest {
+export function createBaseTxEncodeRequest(): TxEncodeRequest {
   return { tx: undefined };
 }
 
@@ -1143,7 +1143,7 @@ export const TxEncodeRequest = {
   },
 };
 
-function createBaseTxEncodeResponse(): TxEncodeResponse {
+export function createBaseTxEncodeResponse(): TxEncodeResponse {
   return { txBytes: new Uint8Array() };
 }
 
@@ -1191,7 +1191,7 @@ export const TxEncodeResponse = {
   },
 };
 
-function createBaseTxEncodeAminoRequest(): TxEncodeAminoRequest {
+export function createBaseTxEncodeAminoRequest(): TxEncodeAminoRequest {
   return { aminoJson: "" };
 }
 
@@ -1238,7 +1238,7 @@ export const TxEncodeAminoRequest = {
   },
 };
 
-function createBaseTxEncodeAminoResponse(): TxEncodeAminoResponse {
+export function createBaseTxEncodeAminoResponse(): TxEncodeAminoResponse {
   return { aminoBinary: new Uint8Array() };
 }
 
@@ -1286,7 +1286,7 @@ export const TxEncodeAminoResponse = {
   },
 };
 
-function createBaseTxDecodeAminoRequest(): TxDecodeAminoRequest {
+export function createBaseTxDecodeAminoRequest(): TxDecodeAminoRequest {
   return { aminoBinary: new Uint8Array() };
 }
 
@@ -1334,7 +1334,7 @@ export const TxDecodeAminoRequest = {
   },
 };
 
-function createBaseTxDecodeAminoResponse(): TxDecodeAminoResponse {
+export function createBaseTxDecodeAminoResponse(): TxDecodeAminoResponse {
   return { aminoJson: "" };
 }
 
@@ -1492,14 +1492,15 @@ export class ServiceClientImpl implements Service {
   }
 }
 
-interface Rpc {
+export interface Rpc {
   request(service: string, method: string, data: Uint8Array): Promise<Uint8Array>;
 }
 
-declare var self: any | undefined;
-declare var window: any | undefined;
-declare var global: any | undefined;
-var globalThis: any = (() => {
+export declare var self: any | undefined;
+export declare var window: any | undefined;
+export declare var global: any | undefined;
+
+export var globalThis: any = (() => {
   if (typeof globalThis !== "undefined") {
     return globalThis;
   }
@@ -1515,7 +1516,7 @@ var globalThis: any = (() => {
   throw "Unable to locate global object";
 })();
 
-function bytesFromBase64(b64: string): Uint8Array {
+export function bytesFromBase64(b64: string): Uint8Array {
   if (globalThis.Buffer) {
     return Uint8Array.from(globalThis.Buffer.from(b64, "base64"));
   } else {
@@ -1528,7 +1529,7 @@ function bytesFromBase64(b64: string): Uint8Array {
   }
 }
 
-function base64FromBytes(arr: Uint8Array): string {
+export function base64FromBytes(arr: Uint8Array): string {
   if (globalThis.Buffer) {
     return globalThis.Buffer.from(arr).toString("base64");
   } else {
@@ -1540,7 +1541,7 @@ function base64FromBytes(arr: Uint8Array): string {
   }
 }
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
+export type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 export type DeepPartial<T> = T extends Builtin
   ? T
@@ -1552,12 +1553,12 @@ export type DeepPartial<T> = T extends Builtin
   ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
-type KeysOfUnion<T> = T extends T ? keyof T : never;
+export type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
 
-function longToNumber(long: Long): number {
+export function longToNumber(long: Long): number {
   if (long.gt(Number.MAX_SAFE_INTEGER)) {
     throw new globalThis.Error("Value is larger than Number.MAX_SAFE_INTEGER");
   }
@@ -1569,6 +1570,6 @@ if (_m0.util.Long !== Long) {
   _m0.configure();
 }
 
-function isSet(value: any): boolean {
+export function isSet(value: any): boolean {
   return value !== null && value !== undefined;
 }

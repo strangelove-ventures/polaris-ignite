@@ -15,14 +15,14 @@ import { GrantAuthorization as typeGrantAuthorization } from "./types";
 import { GrantQueueItem as typeGrantQueueItem } from "./types";
 import { EventGrant as typeEventGrant } from "./types";
 import { EventRevoke as typeEventRevoke } from "./types";
-import { MsgRevoke } from "./types/cosmos/authz/v1beta1/tx";
-import { MsgExec } from "./types/cosmos/authz/v1beta1/tx";
 import { MsgGrant } from "./types/cosmos/authz/v1beta1/tx";
+import { MsgExec } from "./types/cosmos/authz/v1beta1/tx";
+import { MsgRevoke } from "./types/cosmos/authz/v1beta1/tx";
 
 export { MsgExec, MsgGrant, MsgRevoke };
 
-export interface sendMsgRevokeParams {
-  value: MsgRevoke;
+export interface sendMsgGrantParams {
+  value: MsgGrant;
   fee?: StdFee;
   memo?: string;
 }
@@ -33,22 +33,22 @@ export interface sendMsgExecParams {
   memo?: string;
 }
 
-export interface sendMsgGrantParams {
-  value: MsgGrant;
+export interface sendMsgRevokeParams {
+  value: MsgRevoke;
   fee?: StdFee;
   memo?: string;
 }
 
-export interface msgRevokeParams {
-  value: MsgRevoke;
+export interface msgGrantParams {
+  value: MsgGrant;
 }
 
 export interface msgExecParams {
   value: MsgExec;
 }
 
-export interface msgGrantParams {
-  value: MsgGrant;
+export interface msgRevokeParams {
+  value: MsgRevoke;
 }
 
 export const registry = new Registry(msgTypes);
@@ -58,7 +58,7 @@ export interface Field {
   type: unknown;
 }
 
-const getStructure = (template) => {
+export const getStructure = (template) => {
   const structure: { fields: Field[] } = { fields: [] };
   for (const [key, value] of Object.entries(template)) {
     const field = { name: key, type: typeof value };
@@ -66,7 +66,8 @@ const getStructure = (template) => {
   }
   return structure;
 };
-const defaultFee = {
+
+export const defaultFee = {
   amount: [],
   gas: "200000",
 };
@@ -81,19 +82,19 @@ export const txClient = (
   { signer, prefix, addr }: TxClientOptions = { addr: "http://localhost:26657", prefix: "cosmos" },
 ) => {
   return {
-    async sendMsgRevoke({ value, fee, memo }: sendMsgRevokeParams): Promise<DeliverTxResponse> {
+    async sendMsgGrant({ value, fee, memo }: sendMsgGrantParams): Promise<DeliverTxResponse> {
       if (!signer) {
-        throw new Error("TxClient:sendMsgRevoke: Unable to sign Tx. Signer is not present.");
+        throw new Error("TxClient:sendMsgGrant: Unable to sign Tx. Signer is not present.");
       }
       try {
         const { address } = (await signer.getAccounts())[0];
         const signingClient = await SigningStargateClient.connectWithSigner(addr, signer, {
           registry,
         });
-        const msg = this.msgRevoke({ value: MsgRevoke.fromPartial(value) });
+        const msg = this.msgGrant({ value: MsgGrant.fromPartial(value) });
         return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo);
       } catch (e: any) {
-        throw new Error(`TxClient:sendMsgRevoke: Could not broadcast Tx: ${e.message}`);
+        throw new Error(`TxClient:sendMsgGrant: Could not broadcast Tx: ${e.message}`);
       }
     },
 
@@ -113,27 +114,27 @@ export const txClient = (
       }
     },
 
-    async sendMsgGrant({ value, fee, memo }: sendMsgGrantParams): Promise<DeliverTxResponse> {
+    async sendMsgRevoke({ value, fee, memo }: sendMsgRevokeParams): Promise<DeliverTxResponse> {
       if (!signer) {
-        throw new Error("TxClient:sendMsgGrant: Unable to sign Tx. Signer is not present.");
+        throw new Error("TxClient:sendMsgRevoke: Unable to sign Tx. Signer is not present.");
       }
       try {
         const { address } = (await signer.getAccounts())[0];
         const signingClient = await SigningStargateClient.connectWithSigner(addr, signer, {
           registry,
         });
-        const msg = this.msgGrant({ value: MsgGrant.fromPartial(value) });
+        const msg = this.msgRevoke({ value: MsgRevoke.fromPartial(value) });
         return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo);
       } catch (e: any) {
-        throw new Error(`TxClient:sendMsgGrant: Could not broadcast Tx: ${e.message}`);
+        throw new Error(`TxClient:sendMsgRevoke: Could not broadcast Tx: ${e.message}`);
       }
     },
 
-    msgRevoke: ({ value }: msgRevokeParams): EncodeObject => {
+    msgGrant: ({ value }: msgGrantParams): EncodeObject => {
       try {
-        return { typeUrl: "/cosmos.authz.v1beta1.MsgRevoke", value: MsgRevoke.fromPartial(value) };
+        return { typeUrl: "/cosmos.authz.v1beta1.MsgGrant", value: MsgGrant.fromPartial(value) };
       } catch (e: any) {
-        throw new Error(`TxClient:MsgRevoke: Could not create message: ${e.message}`);
+        throw new Error(`TxClient:MsgGrant: Could not create message: ${e.message}`);
       }
     },
 
@@ -145,11 +146,11 @@ export const txClient = (
       }
     },
 
-    msgGrant: ({ value }: msgGrantParams): EncodeObject => {
+    msgRevoke: ({ value }: msgRevokeParams): EncodeObject => {
       try {
-        return { typeUrl: "/cosmos.authz.v1beta1.MsgGrant", value: MsgGrant.fromPartial(value) };
+        return { typeUrl: "/cosmos.authz.v1beta1.MsgRevoke", value: MsgRevoke.fromPartial(value) };
       } catch (e: any) {
-        throw new Error(`TxClient:MsgGrant: Could not create message: ${e.message}`);
+        throw new Error(`TxClient:MsgRevoke: Could not create message: ${e.message}`);
       }
     },
   };
@@ -198,7 +199,7 @@ export class SDKModule {
   }
 }
 
-const Module = (test: IgniteClient) => {
+export const Module = (test: IgniteClient) => {
   return {
     module: {
       CosmosAuthzV1Beta1: new SDKModule(test),
@@ -206,4 +207,5 @@ const Module = (test: IgniteClient) => {
     registry: msgTypes,
   };
 };
+
 export default Module;

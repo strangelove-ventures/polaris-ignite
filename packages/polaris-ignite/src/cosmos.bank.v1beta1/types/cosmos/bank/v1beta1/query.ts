@@ -235,7 +235,7 @@ export interface QuerySendEnabledResponse {
   pagination: PageResponse | undefined;
 }
 
-function createBaseQueryBalanceRequest(): QueryBalanceRequest {
+export function createBaseQueryBalanceRequest(): QueryBalanceRequest {
   return { address: "", denom: "" };
 }
 
@@ -293,7 +293,7 @@ export const QueryBalanceRequest = {
   },
 };
 
-function createBaseQueryBalanceResponse(): QueryBalanceResponse {
+export function createBaseQueryBalanceResponse(): QueryBalanceResponse {
   return { balance: undefined };
 }
 
@@ -341,7 +341,7 @@ export const QueryBalanceResponse = {
   },
 };
 
-function createBaseQueryAllBalancesRequest(): QueryAllBalancesRequest {
+export function createBaseQueryAllBalancesRequest(): QueryAllBalancesRequest {
   return { address: "", pagination: undefined };
 }
 
@@ -403,7 +403,7 @@ export const QueryAllBalancesRequest = {
   },
 };
 
-function createBaseQueryAllBalancesResponse(): QueryAllBalancesResponse {
+export function createBaseQueryAllBalancesResponse(): QueryAllBalancesResponse {
   return { balances: [], pagination: undefined };
 }
 
@@ -469,7 +469,7 @@ export const QueryAllBalancesResponse = {
   },
 };
 
-function createBaseQuerySpendableBalancesRequest(): QuerySpendableBalancesRequest {
+export function createBaseQuerySpendableBalancesRequest(): QuerySpendableBalancesRequest {
   return { address: "", pagination: undefined };
 }
 
@@ -533,7 +533,7 @@ export const QuerySpendableBalancesRequest = {
   },
 };
 
-function createBaseQuerySpendableBalancesResponse(): QuerySpendableBalancesResponse {
+export function createBaseQuerySpendableBalancesResponse(): QuerySpendableBalancesResponse {
   return { balances: [], pagination: undefined };
 }
 
@@ -601,7 +601,7 @@ export const QuerySpendableBalancesResponse = {
   },
 };
 
-function createBaseQuerySpendableBalanceByDenomRequest(): QuerySpendableBalanceByDenomRequest {
+export function createBaseQuerySpendableBalanceByDenomRequest(): QuerySpendableBalanceByDenomRequest {
   return { address: "", denom: "" };
 }
 
@@ -661,7 +661,7 @@ export const QuerySpendableBalanceByDenomRequest = {
   },
 };
 
-function createBaseQuerySpendableBalanceByDenomResponse(): QuerySpendableBalanceByDenomResponse {
+export function createBaseQuerySpendableBalanceByDenomResponse(): QuerySpendableBalanceByDenomResponse {
   return { balance: undefined };
 }
 
@@ -711,7 +711,7 @@ export const QuerySpendableBalanceByDenomResponse = {
   },
 };
 
-function createBaseQueryTotalSupplyRequest(): QueryTotalSupplyRequest {
+export function createBaseQueryTotalSupplyRequest(): QueryTotalSupplyRequest {
   return { pagination: undefined };
 }
 
@@ -762,7 +762,7 @@ export const QueryTotalSupplyRequest = {
   },
 };
 
-function createBaseQueryTotalSupplyResponse(): QueryTotalSupplyResponse {
+export function createBaseQueryTotalSupplyResponse(): QueryTotalSupplyResponse {
   return { supply: [], pagination: undefined };
 }
 
@@ -828,7 +828,7 @@ export const QueryTotalSupplyResponse = {
   },
 };
 
-function createBaseQuerySupplyOfRequest(): QuerySupplyOfRequest {
+export function createBaseQuerySupplyOfRequest(): QuerySupplyOfRequest {
   return { denom: "" };
 }
 
@@ -875,7 +875,7 @@ export const QuerySupplyOfRequest = {
   },
 };
 
-function createBaseQuerySupplyOfResponse(): QuerySupplyOfResponse {
+export function createBaseQuerySupplyOfResponse(): QuerySupplyOfResponse {
   return { amount: undefined };
 }
 
@@ -923,7 +923,7 @@ export const QuerySupplyOfResponse = {
   },
 };
 
-function createBaseQueryParamsRequest(): QueryParamsRequest {
+export function createBaseQueryParamsRequest(): QueryParamsRequest {
   return {};
 }
 
@@ -962,7 +962,7 @@ export const QueryParamsRequest = {
   },
 };
 
-function createBaseQueryParamsResponse(): QueryParamsResponse {
+export function createBaseQueryParamsResponse(): QueryParamsResponse {
   return { params: undefined };
 }
 
@@ -1010,7 +1010,7 @@ export const QueryParamsResponse = {
   },
 };
 
-function createBaseQueryDenomsMetadataRequest(): QueryDenomsMetadataRequest {
+export function createBaseQueryDenomsMetadataRequest(): QueryDenomsMetadataRequest {
   return { pagination: undefined };
 }
 
@@ -1061,7 +1061,7 @@ export const QueryDenomsMetadataRequest = {
   },
 };
 
-function createBaseQueryDenomsMetadataResponse(): QueryDenomsMetadataResponse {
+export function createBaseQueryDenomsMetadataResponse(): QueryDenomsMetadataResponse {
   return { metadatas: [], pagination: undefined };
 }
 
@@ -1127,7 +1127,7 @@ export const QueryDenomsMetadataResponse = {
   },
 };
 
-function createBaseQueryDenomMetadataRequest(): QueryDenomMetadataRequest {
+export function createBaseQueryDenomMetadataRequest(): QueryDenomMetadataRequest {
   return { denom: "" };
 }
 
@@ -1174,7 +1174,7 @@ export const QueryDenomMetadataRequest = {
   },
 };
 
-function createBaseQueryDenomMetadataResponse(): QueryDenomMetadataResponse {
+export function createBaseQueryDenomMetadataResponse(): QueryDenomMetadataResponse {
   return { metadata: undefined };
 }
 
@@ -1222,7 +1222,7 @@ export const QueryDenomMetadataResponse = {
   },
 };
 
-function createBaseQueryDenomOwnersRequest(): QueryDenomOwnersRequest {
+export function createBaseQueryDenomOwnersRequest(): QueryDenomOwnersRequest {
   return { denom: "", pagination: undefined };
 }
 
@@ -1284,7 +1284,7 @@ export const QueryDenomOwnersRequest = {
   },
 };
 
-function createBaseDenomOwner(): DenomOwner {
+export function createBaseDenomOwner(): DenomOwner {
   return { address: "", balance: undefined };
 }
 
@@ -1343,7 +1343,7 @@ export const DenomOwner = {
   },
 };
 
-function createBaseQueryDenomOwnersResponse(): QueryDenomOwnersResponse {
+export function createBaseQueryDenomOwnersResponse(): QueryDenomOwnersResponse {
   return { denomOwners: [], pagination: undefined };
 }
 
@@ -1409,7 +1409,7 @@ export const QueryDenomOwnersResponse = {
   },
 };
 
-function createBaseQuerySendEnabledRequest(): QuerySendEnabledRequest {
+export function createBaseQuerySendEnabledRequest(): QuerySendEnabledRequest {
   return { denoms: [], pagination: undefined };
 }
 
@@ -1475,7 +1475,7 @@ export const QuerySendEnabledRequest = {
   },
 };
 
-function createBaseQuerySendEnabledResponse(): QuerySendEnabledResponse {
+export function createBaseQuerySendEnabledResponse(): QuerySendEnabledResponse {
   return { sendEnabled: [], pagination: undefined };
 }
 
@@ -1702,11 +1702,11 @@ export class QueryClientImpl implements Query {
   }
 }
 
-interface Rpc {
+export interface Rpc {
   request(service: string, method: string, data: Uint8Array): Promise<Uint8Array>;
 }
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
+export type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 export type DeepPartial<T> = T extends Builtin
   ? T
@@ -1718,11 +1718,11 @@ export type DeepPartial<T> = T extends Builtin
   ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
-type KeysOfUnion<T> = T extends T ? keyof T : never;
+export type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
 
-function isSet(value: any): boolean {
+export function isSet(value: any): boolean {
   return value !== null && value !== undefined;
 }

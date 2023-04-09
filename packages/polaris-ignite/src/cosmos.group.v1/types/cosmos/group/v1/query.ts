@@ -220,7 +220,7 @@ export interface QueryGroupsResponse {
   pagination: PageResponse | undefined;
 }
 
-function createBaseQueryGroupInfoRequest(): QueryGroupInfoRequest {
+export function createBaseQueryGroupInfoRequest(): QueryGroupInfoRequest {
   return { groupId: 0 };
 }
 
@@ -267,7 +267,7 @@ export const QueryGroupInfoRequest = {
   },
 };
 
-function createBaseQueryGroupInfoResponse(): QueryGroupInfoResponse {
+export function createBaseQueryGroupInfoResponse(): QueryGroupInfoResponse {
   return { info: undefined };
 }
 
@@ -314,7 +314,7 @@ export const QueryGroupInfoResponse = {
   },
 };
 
-function createBaseQueryGroupPolicyInfoRequest(): QueryGroupPolicyInfoRequest {
+export function createBaseQueryGroupPolicyInfoRequest(): QueryGroupPolicyInfoRequest {
   return { address: "" };
 }
 
@@ -361,7 +361,7 @@ export const QueryGroupPolicyInfoRequest = {
   },
 };
 
-function createBaseQueryGroupPolicyInfoResponse(): QueryGroupPolicyInfoResponse {
+export function createBaseQueryGroupPolicyInfoResponse(): QueryGroupPolicyInfoResponse {
   return { info: undefined };
 }
 
@@ -409,7 +409,7 @@ export const QueryGroupPolicyInfoResponse = {
   },
 };
 
-function createBaseQueryGroupMembersRequest(): QueryGroupMembersRequest {
+export function createBaseQueryGroupMembersRequest(): QueryGroupMembersRequest {
   return { groupId: 0, pagination: undefined };
 }
 
@@ -471,7 +471,7 @@ export const QueryGroupMembersRequest = {
   },
 };
 
-function createBaseQueryGroupMembersResponse(): QueryGroupMembersResponse {
+export function createBaseQueryGroupMembersResponse(): QueryGroupMembersResponse {
   return { members: [], pagination: undefined };
 }
 
@@ -537,7 +537,7 @@ export const QueryGroupMembersResponse = {
   },
 };
 
-function createBaseQueryGroupsByAdminRequest(): QueryGroupsByAdminRequest {
+export function createBaseQueryGroupsByAdminRequest(): QueryGroupsByAdminRequest {
   return { admin: "", pagination: undefined };
 }
 
@@ -599,7 +599,7 @@ export const QueryGroupsByAdminRequest = {
   },
 };
 
-function createBaseQueryGroupsByAdminResponse(): QueryGroupsByAdminResponse {
+export function createBaseQueryGroupsByAdminResponse(): QueryGroupsByAdminResponse {
   return { groups: [], pagination: undefined };
 }
 
@@ -665,7 +665,7 @@ export const QueryGroupsByAdminResponse = {
   },
 };
 
-function createBaseQueryGroupPoliciesByGroupRequest(): QueryGroupPoliciesByGroupRequest {
+export function createBaseQueryGroupPoliciesByGroupRequest(): QueryGroupPoliciesByGroupRequest {
   return { groupId: 0, pagination: undefined };
 }
 
@@ -729,7 +729,7 @@ export const QueryGroupPoliciesByGroupRequest = {
   },
 };
 
-function createBaseQueryGroupPoliciesByGroupResponse(): QueryGroupPoliciesByGroupResponse {
+export function createBaseQueryGroupPoliciesByGroupResponse(): QueryGroupPoliciesByGroupResponse {
   return { groupPolicies: [], pagination: undefined };
 }
 
@@ -799,7 +799,7 @@ export const QueryGroupPoliciesByGroupResponse = {
   },
 };
 
-function createBaseQueryGroupPoliciesByAdminRequest(): QueryGroupPoliciesByAdminRequest {
+export function createBaseQueryGroupPoliciesByAdminRequest(): QueryGroupPoliciesByAdminRequest {
   return { admin: "", pagination: undefined };
 }
 
@@ -863,7 +863,7 @@ export const QueryGroupPoliciesByAdminRequest = {
   },
 };
 
-function createBaseQueryGroupPoliciesByAdminResponse(): QueryGroupPoliciesByAdminResponse {
+export function createBaseQueryGroupPoliciesByAdminResponse(): QueryGroupPoliciesByAdminResponse {
   return { groupPolicies: [], pagination: undefined };
 }
 
@@ -933,7 +933,7 @@ export const QueryGroupPoliciesByAdminResponse = {
   },
 };
 
-function createBaseQueryProposalRequest(): QueryProposalRequest {
+export function createBaseQueryProposalRequest(): QueryProposalRequest {
   return { proposalId: 0 };
 }
 
@@ -980,7 +980,7 @@ export const QueryProposalRequest = {
   },
 };
 
-function createBaseQueryProposalResponse(): QueryProposalResponse {
+export function createBaseQueryProposalResponse(): QueryProposalResponse {
   return { proposal: undefined };
 }
 
@@ -1028,7 +1028,7 @@ export const QueryProposalResponse = {
   },
 };
 
-function createBaseQueryProposalsByGroupPolicyRequest(): QueryProposalsByGroupPolicyRequest {
+export function createBaseQueryProposalsByGroupPolicyRequest(): QueryProposalsByGroupPolicyRequest {
   return { address: "", pagination: undefined };
 }
 
@@ -1092,7 +1092,7 @@ export const QueryProposalsByGroupPolicyRequest = {
   },
 };
 
-function createBaseQueryProposalsByGroupPolicyResponse(): QueryProposalsByGroupPolicyResponse {
+export function createBaseQueryProposalsByGroupPolicyResponse(): QueryProposalsByGroupPolicyResponse {
   return { proposals: [], pagination: undefined };
 }
 
@@ -1160,7 +1160,7 @@ export const QueryProposalsByGroupPolicyResponse = {
   },
 };
 
-function createBaseQueryVoteByProposalVoterRequest(): QueryVoteByProposalVoterRequest {
+export function createBaseQueryVoteByProposalVoterRequest(): QueryVoteByProposalVoterRequest {
   return { proposalId: 0, voter: "" };
 }
 
@@ -1220,7 +1220,7 @@ export const QueryVoteByProposalVoterRequest = {
   },
 };
 
-function createBaseQueryVoteByProposalVoterResponse(): QueryVoteByProposalVoterResponse {
+export function createBaseQueryVoteByProposalVoterResponse(): QueryVoteByProposalVoterResponse {
   return { vote: undefined };
 }
 
@@ -1269,7 +1269,7 @@ export const QueryVoteByProposalVoterResponse = {
   },
 };
 
-function createBaseQueryVotesByProposalRequest(): QueryVotesByProposalRequest {
+export function createBaseQueryVotesByProposalRequest(): QueryVotesByProposalRequest {
   return { proposalId: 0, pagination: undefined };
 }
 
@@ -1331,7 +1331,7 @@ export const QueryVotesByProposalRequest = {
   },
 };
 
-function createBaseQueryVotesByProposalResponse(): QueryVotesByProposalResponse {
+export function createBaseQueryVotesByProposalResponse(): QueryVotesByProposalResponse {
   return { votes: [], pagination: undefined };
 }
 
@@ -1397,7 +1397,7 @@ export const QueryVotesByProposalResponse = {
   },
 };
 
-function createBaseQueryVotesByVoterRequest(): QueryVotesByVoterRequest {
+export function createBaseQueryVotesByVoterRequest(): QueryVotesByVoterRequest {
   return { voter: "", pagination: undefined };
 }
 
@@ -1459,7 +1459,7 @@ export const QueryVotesByVoterRequest = {
   },
 };
 
-function createBaseQueryVotesByVoterResponse(): QueryVotesByVoterResponse {
+export function createBaseQueryVotesByVoterResponse(): QueryVotesByVoterResponse {
   return { votes: [], pagination: undefined };
 }
 
@@ -1525,7 +1525,7 @@ export const QueryVotesByVoterResponse = {
   },
 };
 
-function createBaseQueryGroupsByMemberRequest(): QueryGroupsByMemberRequest {
+export function createBaseQueryGroupsByMemberRequest(): QueryGroupsByMemberRequest {
   return { address: "", pagination: undefined };
 }
 
@@ -1587,7 +1587,7 @@ export const QueryGroupsByMemberRequest = {
   },
 };
 
-function createBaseQueryGroupsByMemberResponse(): QueryGroupsByMemberResponse {
+export function createBaseQueryGroupsByMemberResponse(): QueryGroupsByMemberResponse {
   return { groups: [], pagination: undefined };
 }
 
@@ -1653,7 +1653,7 @@ export const QueryGroupsByMemberResponse = {
   },
 };
 
-function createBaseQueryTallyResultRequest(): QueryTallyResultRequest {
+export function createBaseQueryTallyResultRequest(): QueryTallyResultRequest {
   return { proposalId: 0 };
 }
 
@@ -1700,7 +1700,7 @@ export const QueryTallyResultRequest = {
   },
 };
 
-function createBaseQueryTallyResultResponse(): QueryTallyResultResponse {
+export function createBaseQueryTallyResultResponse(): QueryTallyResultResponse {
   return { tally: undefined };
 }
 
@@ -1748,7 +1748,7 @@ export const QueryTallyResultResponse = {
   },
 };
 
-function createBaseQueryGroupsRequest(): QueryGroupsRequest {
+export function createBaseQueryGroupsRequest(): QueryGroupsRequest {
   return { pagination: undefined };
 }
 
@@ -1799,7 +1799,7 @@ export const QueryGroupsRequest = {
   },
 };
 
-function createBaseQueryGroupsResponse(): QueryGroupsResponse {
+export function createBaseQueryGroupsResponse(): QueryGroupsResponse {
   return { groups: [], pagination: undefined };
 }
 
@@ -2011,14 +2011,15 @@ export class QueryClientImpl implements Query {
   }
 }
 
-interface Rpc {
+export interface Rpc {
   request(service: string, method: string, data: Uint8Array): Promise<Uint8Array>;
 }
 
-declare var self: any | undefined;
-declare var window: any | undefined;
-declare var global: any | undefined;
-var globalThis: any = (() => {
+export declare var self: any | undefined;
+export declare var window: any | undefined;
+export declare var global: any | undefined;
+
+export var globalThis: any = (() => {
   if (typeof globalThis !== "undefined") {
     return globalThis;
   }
@@ -2034,7 +2035,7 @@ var globalThis: any = (() => {
   throw "Unable to locate global object";
 })();
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
+export type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 export type DeepPartial<T> = T extends Builtin
   ? T
@@ -2046,12 +2047,12 @@ export type DeepPartial<T> = T extends Builtin
   ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
-type KeysOfUnion<T> = T extends T ? keyof T : never;
+export type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
 
-function longToNumber(long: Long): number {
+export function longToNumber(long: Long): number {
   if (long.gt(Number.MAX_SAFE_INTEGER)) {
     throw new globalThis.Error("Value is larger than Number.MAX_SAFE_INTEGER");
   }
@@ -2063,6 +2064,6 @@ if (_m0.util.Long !== Long) {
   _m0.configure();
 }
 
-function isSet(value: any): boolean {
+export function isSet(value: any): boolean {
   return value !== null && value !== undefined;
 }

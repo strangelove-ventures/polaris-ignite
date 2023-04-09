@@ -297,7 +297,7 @@ export interface MsgLeaveGroup {
 /** MsgLeaveGroupResponse is the Msg/LeaveGroup response type. */
 export interface MsgLeaveGroupResponse {}
 
-function createBaseMsgCreateGroup(): MsgCreateGroup {
+export function createBaseMsgCreateGroup(): MsgCreateGroup {
   return { admin: "", members: [], metadata: "" };
 }
 
@@ -368,7 +368,7 @@ export const MsgCreateGroup = {
   },
 };
 
-function createBaseMsgCreateGroupResponse(): MsgCreateGroupResponse {
+export function createBaseMsgCreateGroupResponse(): MsgCreateGroupResponse {
   return { groupId: 0 };
 }
 
@@ -415,7 +415,7 @@ export const MsgCreateGroupResponse = {
   },
 };
 
-function createBaseMsgUpdateGroupMembers(): MsgUpdateGroupMembers {
+export function createBaseMsgUpdateGroupMembers(): MsgUpdateGroupMembers {
   return { admin: "", groupId: 0, memberUpdates: [] };
 }
 
@@ -488,7 +488,7 @@ export const MsgUpdateGroupMembers = {
   },
 };
 
-function createBaseMsgUpdateGroupMembersResponse(): MsgUpdateGroupMembersResponse {
+export function createBaseMsgUpdateGroupMembersResponse(): MsgUpdateGroupMembersResponse {
   return {};
 }
 
@@ -527,7 +527,7 @@ export const MsgUpdateGroupMembersResponse = {
   },
 };
 
-function createBaseMsgUpdateGroupAdmin(): MsgUpdateGroupAdmin {
+export function createBaseMsgUpdateGroupAdmin(): MsgUpdateGroupAdmin {
   return { admin: "", groupId: 0, newAdmin: "" };
 }
 
@@ -594,7 +594,7 @@ export const MsgUpdateGroupAdmin = {
   },
 };
 
-function createBaseMsgUpdateGroupAdminResponse(): MsgUpdateGroupAdminResponse {
+export function createBaseMsgUpdateGroupAdminResponse(): MsgUpdateGroupAdminResponse {
   return {};
 }
 
@@ -633,7 +633,7 @@ export const MsgUpdateGroupAdminResponse = {
   },
 };
 
-function createBaseMsgUpdateGroupMetadata(): MsgUpdateGroupMetadata {
+export function createBaseMsgUpdateGroupMetadata(): MsgUpdateGroupMetadata {
   return { admin: "", groupId: 0, metadata: "" };
 }
 
@@ -700,7 +700,7 @@ export const MsgUpdateGroupMetadata = {
   },
 };
 
-function createBaseMsgUpdateGroupMetadataResponse(): MsgUpdateGroupMetadataResponse {
+export function createBaseMsgUpdateGroupMetadataResponse(): MsgUpdateGroupMetadataResponse {
   return {};
 }
 
@@ -739,7 +739,7 @@ export const MsgUpdateGroupMetadataResponse = {
   },
 };
 
-function createBaseMsgCreateGroupPolicy(): MsgCreateGroupPolicy {
+export function createBaseMsgCreateGroupPolicy(): MsgCreateGroupPolicy {
   return { admin: "", groupId: 0, metadata: "", decisionPolicy: undefined };
 }
 
@@ -819,7 +819,7 @@ export const MsgCreateGroupPolicy = {
   },
 };
 
-function createBaseMsgCreateGroupPolicyResponse(): MsgCreateGroupPolicyResponse {
+export function createBaseMsgCreateGroupPolicyResponse(): MsgCreateGroupPolicyResponse {
   return { address: "" };
 }
 
@@ -866,7 +866,7 @@ export const MsgCreateGroupPolicyResponse = {
   },
 };
 
-function createBaseMsgUpdateGroupPolicyAdmin(): MsgUpdateGroupPolicyAdmin {
+export function createBaseMsgUpdateGroupPolicyAdmin(): MsgUpdateGroupPolicyAdmin {
   return { admin: "", groupPolicyAddress: "", newAdmin: "" };
 }
 
@@ -933,7 +933,7 @@ export const MsgUpdateGroupPolicyAdmin = {
   },
 };
 
-function createBaseMsgUpdateGroupPolicyAdminResponse(): MsgUpdateGroupPolicyAdminResponse {
+export function createBaseMsgUpdateGroupPolicyAdminResponse(): MsgUpdateGroupPolicyAdminResponse {
   return {};
 }
 
@@ -974,7 +974,7 @@ export const MsgUpdateGroupPolicyAdminResponse = {
   },
 };
 
-function createBaseMsgCreateGroupWithPolicy(): MsgCreateGroupWithPolicy {
+export function createBaseMsgCreateGroupWithPolicy(): MsgCreateGroupWithPolicy {
   return {
     admin: "",
     members: [],
@@ -1083,7 +1083,7 @@ export const MsgCreateGroupWithPolicy = {
   },
 };
 
-function createBaseMsgCreateGroupWithPolicyResponse(): MsgCreateGroupWithPolicyResponse {
+export function createBaseMsgCreateGroupWithPolicyResponse(): MsgCreateGroupWithPolicyResponse {
   return { groupId: 0, groupPolicyAddress: "" };
 }
 
@@ -1143,7 +1143,7 @@ export const MsgCreateGroupWithPolicyResponse = {
   },
 };
 
-function createBaseMsgUpdateGroupPolicyDecisionPolicy(): MsgUpdateGroupPolicyDecisionPolicy {
+export function createBaseMsgUpdateGroupPolicyDecisionPolicy(): MsgUpdateGroupPolicyDecisionPolicy {
   return { admin: "", groupPolicyAddress: "", decisionPolicy: undefined };
 }
 
@@ -1216,7 +1216,7 @@ export const MsgUpdateGroupPolicyDecisionPolicy = {
   },
 };
 
-function createBaseMsgUpdateGroupPolicyDecisionPolicyResponse(): MsgUpdateGroupPolicyDecisionPolicyResponse {
+export function createBaseMsgUpdateGroupPolicyDecisionPolicyResponse(): MsgUpdateGroupPolicyDecisionPolicyResponse {
   return {};
 }
 
@@ -1257,7 +1257,7 @@ export const MsgUpdateGroupPolicyDecisionPolicyResponse = {
   },
 };
 
-function createBaseMsgUpdateGroupPolicyMetadata(): MsgUpdateGroupPolicyMetadata {
+export function createBaseMsgUpdateGroupPolicyMetadata(): MsgUpdateGroupPolicyMetadata {
   return { admin: "", groupPolicyAddress: "", metadata: "" };
 }
 
@@ -1324,7 +1324,7 @@ export const MsgUpdateGroupPolicyMetadata = {
   },
 };
 
-function createBaseMsgUpdateGroupPolicyMetadataResponse(): MsgUpdateGroupPolicyMetadataResponse {
+export function createBaseMsgUpdateGroupPolicyMetadataResponse(): MsgUpdateGroupPolicyMetadataResponse {
   return {};
 }
 
@@ -1365,7 +1365,7 @@ export const MsgUpdateGroupPolicyMetadataResponse = {
   },
 };
 
-function createBaseMsgSubmitProposal(): MsgSubmitProposal {
+export function createBaseMsgSubmitProposal(): MsgSubmitProposal {
   return { groupPolicyAddress: "", proposers: [], metadata: "", messages: [], exec: 0, title: "", summary: "" };
 }
 
@@ -1476,7 +1476,7 @@ export const MsgSubmitProposal = {
   },
 };
 
-function createBaseMsgSubmitProposalResponse(): MsgSubmitProposalResponse {
+export function createBaseMsgSubmitProposalResponse(): MsgSubmitProposalResponse {
   return { proposalId: 0 };
 }
 
@@ -1523,7 +1523,7 @@ export const MsgSubmitProposalResponse = {
   },
 };
 
-function createBaseMsgWithdrawProposal(): MsgWithdrawProposal {
+export function createBaseMsgWithdrawProposal(): MsgWithdrawProposal {
   return { proposalId: 0, address: "" };
 }
 
@@ -1581,7 +1581,7 @@ export const MsgWithdrawProposal = {
   },
 };
 
-function createBaseMsgWithdrawProposalResponse(): MsgWithdrawProposalResponse {
+export function createBaseMsgWithdrawProposalResponse(): MsgWithdrawProposalResponse {
   return {};
 }
 
@@ -1620,7 +1620,7 @@ export const MsgWithdrawProposalResponse = {
   },
 };
 
-function createBaseMsgVote(): MsgVote {
+export function createBaseMsgVote(): MsgVote {
   return { proposalId: 0, voter: "", option: 0, metadata: "", exec: 0 };
 }
 
@@ -1705,7 +1705,7 @@ export const MsgVote = {
   },
 };
 
-function createBaseMsgVoteResponse(): MsgVoteResponse {
+export function createBaseMsgVoteResponse(): MsgVoteResponse {
   return {};
 }
 
@@ -1744,7 +1744,7 @@ export const MsgVoteResponse = {
   },
 };
 
-function createBaseMsgExec(): MsgExec {
+export function createBaseMsgExec(): MsgExec {
   return { proposalId: 0, executor: "" };
 }
 
@@ -1802,7 +1802,7 @@ export const MsgExec = {
   },
 };
 
-function createBaseMsgExecResponse(): MsgExecResponse {
+export function createBaseMsgExecResponse(): MsgExecResponse {
   return { result: 0 };
 }
 
@@ -1849,7 +1849,7 @@ export const MsgExecResponse = {
   },
 };
 
-function createBaseMsgLeaveGroup(): MsgLeaveGroup {
+export function createBaseMsgLeaveGroup(): MsgLeaveGroup {
   return { address: "", groupId: 0 };
 }
 
@@ -1907,7 +1907,7 @@ export const MsgLeaveGroup = {
   },
 };
 
-function createBaseMsgLeaveGroupResponse(): MsgLeaveGroupResponse {
+export function createBaseMsgLeaveGroupResponse(): MsgLeaveGroupResponse {
   return {};
 }
 
@@ -2086,14 +2086,15 @@ export class MsgClientImpl implements Msg {
   }
 }
 
-interface Rpc {
+export interface Rpc {
   request(service: string, method: string, data: Uint8Array): Promise<Uint8Array>;
 }
 
-declare var self: any | undefined;
-declare var window: any | undefined;
-declare var global: any | undefined;
-var globalThis: any = (() => {
+export declare var self: any | undefined;
+export declare var window: any | undefined;
+export declare var global: any | undefined;
+
+export var globalThis: any = (() => {
   if (typeof globalThis !== "undefined") {
     return globalThis;
   }
@@ -2109,7 +2110,7 @@ var globalThis: any = (() => {
   throw "Unable to locate global object";
 })();
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
+export type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 export type DeepPartial<T> = T extends Builtin
   ? T
@@ -2121,12 +2122,12 @@ export type DeepPartial<T> = T extends Builtin
   ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
-type KeysOfUnion<T> = T extends T ? keyof T : never;
+export type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
 
-function longToNumber(long: Long): number {
+export function longToNumber(long: Long): number {
   if (long.gt(Number.MAX_SAFE_INTEGER)) {
     throw new globalThis.Error("Value is larger than Number.MAX_SAFE_INTEGER");
   }
@@ -2138,6 +2139,6 @@ if (_m0.util.Long !== Long) {
   _m0.configure();
 }
 
-function isSet(value: any): boolean {
+export function isSet(value: any): boolean {
   return value !== null && value !== undefined;
 }

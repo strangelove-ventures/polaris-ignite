@@ -145,7 +145,7 @@ export interface CommunityPoolSpendProposalWithDeposit {
   deposit: string;
 }
 
-function createBaseParams(): Params {
+export function createBaseParams(): Params {
   return { communityTax: "", baseProposerReward: "", bonusProposerReward: "", withdrawAddrEnabled: false };
 }
 
@@ -221,7 +221,7 @@ export const Params = {
   },
 };
 
-function createBaseValidatorHistoricalRewards(): ValidatorHistoricalRewards {
+export function createBaseValidatorHistoricalRewards(): ValidatorHistoricalRewards {
   return { cumulativeRewardRatio: [], referenceCount: 0 };
 }
 
@@ -285,7 +285,7 @@ export const ValidatorHistoricalRewards = {
   },
 };
 
-function createBaseValidatorCurrentRewards(): ValidatorCurrentRewards {
+export function createBaseValidatorCurrentRewards(): ValidatorCurrentRewards {
   return { rewards: [], period: 0 };
 }
 
@@ -347,7 +347,7 @@ export const ValidatorCurrentRewards = {
   },
 };
 
-function createBaseValidatorAccumulatedCommission(): ValidatorAccumulatedCommission {
+export function createBaseValidatorAccumulatedCommission(): ValidatorAccumulatedCommission {
   return { commission: [] };
 }
 
@@ -402,7 +402,7 @@ export const ValidatorAccumulatedCommission = {
   },
 };
 
-function createBaseValidatorOutstandingRewards(): ValidatorOutstandingRewards {
+export function createBaseValidatorOutstandingRewards(): ValidatorOutstandingRewards {
   return { rewards: [] };
 }
 
@@ -453,7 +453,7 @@ export const ValidatorOutstandingRewards = {
   },
 };
 
-function createBaseValidatorSlashEvent(): ValidatorSlashEvent {
+export function createBaseValidatorSlashEvent(): ValidatorSlashEvent {
   return { validatorPeriod: 0, fraction: "" };
 }
 
@@ -511,7 +511,7 @@ export const ValidatorSlashEvent = {
   },
 };
 
-function createBaseValidatorSlashEvents(): ValidatorSlashEvents {
+export function createBaseValidatorSlashEvents(): ValidatorSlashEvents {
   return { validatorSlashEvents: [] };
 }
 
@@ -568,7 +568,7 @@ export const ValidatorSlashEvents = {
   },
 };
 
-function createBaseFeePool(): FeePool {
+export function createBaseFeePool(): FeePool {
   return { communityPool: [] };
 }
 
@@ -623,7 +623,7 @@ export const FeePool = {
   },
 };
 
-function createBaseCommunityPoolSpendProposal(): CommunityPoolSpendProposal {
+export function createBaseCommunityPoolSpendProposal(): CommunityPoolSpendProposal {
   return { title: "", description: "", recipient: "", amount: [] };
 }
 
@@ -703,7 +703,7 @@ export const CommunityPoolSpendProposal = {
   },
 };
 
-function createBaseDelegatorStartingInfo(): DelegatorStartingInfo {
+export function createBaseDelegatorStartingInfo(): DelegatorStartingInfo {
   return { previousPeriod: 0, stake: "", height: 0 };
 }
 
@@ -770,7 +770,7 @@ export const DelegatorStartingInfo = {
   },
 };
 
-function createBaseDelegationDelegatorReward(): DelegationDelegatorReward {
+export function createBaseDelegationDelegatorReward(): DelegationDelegatorReward {
   return { validatorAddress: "", reward: [] };
 }
 
@@ -832,7 +832,7 @@ export const DelegationDelegatorReward = {
   },
 };
 
-function createBaseCommunityPoolSpendProposalWithDeposit(): CommunityPoolSpendProposalWithDeposit {
+export function createBaseCommunityPoolSpendProposalWithDeposit(): CommunityPoolSpendProposalWithDeposit {
   return { title: "", description: "", recipient: "", amount: "", deposit: "" };
 }
 
@@ -919,10 +919,11 @@ export const CommunityPoolSpendProposalWithDeposit = {
   },
 };
 
-declare var self: any | undefined;
-declare var window: any | undefined;
-declare var global: any | undefined;
-var globalThis: any = (() => {
+export declare var self: any | undefined;
+export declare var window: any | undefined;
+export declare var global: any | undefined;
+
+export var globalThis: any = (() => {
   if (typeof globalThis !== "undefined") {
     return globalThis;
   }
@@ -938,7 +939,7 @@ var globalThis: any = (() => {
   throw "Unable to locate global object";
 })();
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
+export type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 export type DeepPartial<T> = T extends Builtin
   ? T
@@ -950,12 +951,12 @@ export type DeepPartial<T> = T extends Builtin
   ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
-type KeysOfUnion<T> = T extends T ? keyof T : never;
+export type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
 
-function longToNumber(long: Long): number {
+export function longToNumber(long: Long): number {
   if (long.gt(Number.MAX_SAFE_INTEGER)) {
     throw new globalThis.Error("Value is larger than Number.MAX_SAFE_INTEGER");
   }
@@ -967,6 +968,6 @@ if (_m0.util.Long !== Long) {
   _m0.configure();
 }
 
-function isSet(value: any): boolean {
+export function isSet(value: any): boolean {
   return value !== null && value !== undefined;
 }

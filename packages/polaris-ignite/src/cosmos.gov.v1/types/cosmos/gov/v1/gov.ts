@@ -310,7 +310,7 @@ export interface Params {
   burnVoteVeto: boolean;
 }
 
-function createBaseWeightedVoteOption(): WeightedVoteOption {
+export function createBaseWeightedVoteOption(): WeightedVoteOption {
   return { option: 0, weight: "" };
 }
 
@@ -368,7 +368,7 @@ export const WeightedVoteOption = {
   },
 };
 
-function createBaseDeposit(): Deposit {
+export function createBaseDeposit(): Deposit {
   return { proposalId: 0, depositor: "", amount: [] };
 }
 
@@ -439,7 +439,7 @@ export const Deposit = {
   },
 };
 
-function createBaseProposal(): Proposal {
+export function createBaseProposal(): Proposal {
   return {
     id: 0,
     messages: [],
@@ -622,7 +622,7 @@ export const Proposal = {
   },
 };
 
-function createBaseTallyResult(): TallyResult {
+export function createBaseTallyResult(): TallyResult {
   return { yesCount: "", abstainCount: "", noCount: "", noWithVetoCount: "" };
 }
 
@@ -698,7 +698,7 @@ export const TallyResult = {
   },
 };
 
-function createBaseVote(): Vote {
+export function createBaseVote(): Vote {
   return { proposalId: 0, voter: "", options: [], metadata: "" };
 }
 
@@ -778,7 +778,7 @@ export const Vote = {
   },
 };
 
-function createBaseDepositParams(): DepositParams {
+export function createBaseDepositParams(): DepositParams {
   return { minDeposit: [], maxDepositPeriod: undefined };
 }
 
@@ -844,7 +844,7 @@ export const DepositParams = {
   },
 };
 
-function createBaseVotingParams(): VotingParams {
+export function createBaseVotingParams(): VotingParams {
   return { votingPeriod: undefined };
 }
 
@@ -895,7 +895,7 @@ export const VotingParams = {
   },
 };
 
-function createBaseTallyParams(): TallyParams {
+export function createBaseTallyParams(): TallyParams {
   return { quorum: "", threshold: "", vetoThreshold: "" };
 }
 
@@ -962,7 +962,7 @@ export const TallyParams = {
   },
 };
 
-function createBaseParams(): Params {
+export function createBaseParams(): Params {
   return {
     minDeposit: [],
     maxDepositPeriod: undefined,
@@ -1118,10 +1118,11 @@ export const Params = {
   },
 };
 
-declare var self: any | undefined;
-declare var window: any | undefined;
-declare var global: any | undefined;
-var globalThis: any = (() => {
+export declare var self: any | undefined;
+export declare var window: any | undefined;
+export declare var global: any | undefined;
+
+export var globalThis: any = (() => {
   if (typeof globalThis !== "undefined") {
     return globalThis;
   }
@@ -1137,7 +1138,7 @@ var globalThis: any = (() => {
   throw "Unable to locate global object";
 })();
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
+export type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 export type DeepPartial<T> = T extends Builtin
   ? T
@@ -1149,24 +1150,24 @@ export type DeepPartial<T> = T extends Builtin
   ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
-type KeysOfUnion<T> = T extends T ? keyof T : never;
+export type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
 
-function toTimestamp(date: Date): Timestamp {
+export function toTimestamp(date: Date): Timestamp {
   const seconds = date.getTime() / 1_000;
   const nanos = (date.getTime() % 1_000) * 1_000_000;
   return { seconds, nanos };
 }
 
-function fromTimestamp(t: Timestamp): Date {
+export function fromTimestamp(t: Timestamp): Date {
   let millis = t.seconds * 1_000;
   millis += t.nanos / 1_000_000;
   return new Date(millis);
 }
 
-function fromJsonTimestamp(o: any): Date {
+export function fromJsonTimestamp(o: any): Date {
   if (o instanceof Date) {
     return o;
   } else if (typeof o === "string") {
@@ -1176,7 +1177,7 @@ function fromJsonTimestamp(o: any): Date {
   }
 }
 
-function longToNumber(long: Long): number {
+export function longToNumber(long: Long): number {
   if (long.gt(Number.MAX_SAFE_INTEGER)) {
     throw new globalThis.Error("Value is larger than Number.MAX_SAFE_INTEGER");
   }
@@ -1188,6 +1189,6 @@ if (_m0.util.Long !== Long) {
   _m0.configure();
 }
 
-function isSet(value: any): boolean {
+export function isSet(value: any): boolean {
   return value !== null && value !== undefined;
 }

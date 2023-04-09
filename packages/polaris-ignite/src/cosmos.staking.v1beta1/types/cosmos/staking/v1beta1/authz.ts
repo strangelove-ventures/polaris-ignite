@@ -85,7 +85,7 @@ export interface StakeAuthorization_Validators {
   address: string[];
 }
 
-function createBaseStakeAuthorization(): StakeAuthorization {
+export function createBaseStakeAuthorization(): StakeAuthorization {
   return { maxTokens: undefined, allowList: undefined, denyList: undefined, authorizationType: 0 };
 }
 
@@ -171,7 +171,7 @@ export const StakeAuthorization = {
   },
 };
 
-function createBaseStakeAuthorization_Validators(): StakeAuthorization_Validators {
+export function createBaseStakeAuthorization_Validators(): StakeAuthorization_Validators {
   return { address: [] };
 }
 
@@ -224,7 +224,7 @@ export const StakeAuthorization_Validators = {
   },
 };
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
+export type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 export type DeepPartial<T> = T extends Builtin
   ? T
@@ -236,11 +236,11 @@ export type DeepPartial<T> = T extends Builtin
   ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
-type KeysOfUnion<T> = T extends T ? keyof T : never;
+export type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
 
-function isSet(value: any): boolean {
+export function isSet(value: any): boolean {
   return value !== null && value !== undefined;
 }

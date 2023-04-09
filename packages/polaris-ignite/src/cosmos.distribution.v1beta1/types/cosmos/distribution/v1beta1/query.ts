@@ -190,7 +190,7 @@ export interface QueryCommunityPoolResponse {
   pool: DecCoin[];
 }
 
-function createBaseQueryParamsRequest(): QueryParamsRequest {
+export function createBaseQueryParamsRequest(): QueryParamsRequest {
   return {};
 }
 
@@ -229,7 +229,7 @@ export const QueryParamsRequest = {
   },
 };
 
-function createBaseQueryParamsResponse(): QueryParamsResponse {
+export function createBaseQueryParamsResponse(): QueryParamsResponse {
   return { params: undefined };
 }
 
@@ -277,7 +277,7 @@ export const QueryParamsResponse = {
   },
 };
 
-function createBaseQueryValidatorDistributionInfoRequest(): QueryValidatorDistributionInfoRequest {
+export function createBaseQueryValidatorDistributionInfoRequest(): QueryValidatorDistributionInfoRequest {
   return { validatorAddress: "" };
 }
 
@@ -326,7 +326,7 @@ export const QueryValidatorDistributionInfoRequest = {
   },
 };
 
-function createBaseQueryValidatorDistributionInfoResponse(): QueryValidatorDistributionInfoResponse {
+export function createBaseQueryValidatorDistributionInfoResponse(): QueryValidatorDistributionInfoResponse {
   return { operatorAddress: "", selfBondRewards: [], commission: [] };
 }
 
@@ -405,7 +405,7 @@ export const QueryValidatorDistributionInfoResponse = {
   },
 };
 
-function createBaseQueryValidatorOutstandingRewardsRequest(): QueryValidatorOutstandingRewardsRequest {
+export function createBaseQueryValidatorOutstandingRewardsRequest(): QueryValidatorOutstandingRewardsRequest {
   return { validatorAddress: "" };
 }
 
@@ -454,7 +454,7 @@ export const QueryValidatorOutstandingRewardsRequest = {
   },
 };
 
-function createBaseQueryValidatorOutstandingRewardsResponse(): QueryValidatorOutstandingRewardsResponse {
+export function createBaseQueryValidatorOutstandingRewardsResponse(): QueryValidatorOutstandingRewardsResponse {
   return { rewards: undefined };
 }
 
@@ -507,7 +507,7 @@ export const QueryValidatorOutstandingRewardsResponse = {
   },
 };
 
-function createBaseQueryValidatorCommissionRequest(): QueryValidatorCommissionRequest {
+export function createBaseQueryValidatorCommissionRequest(): QueryValidatorCommissionRequest {
   return { validatorAddress: "" };
 }
 
@@ -556,7 +556,7 @@ export const QueryValidatorCommissionRequest = {
   },
 };
 
-function createBaseQueryValidatorCommissionResponse(): QueryValidatorCommissionResponse {
+export function createBaseQueryValidatorCommissionResponse(): QueryValidatorCommissionResponse {
   return { commission: undefined };
 }
 
@@ -611,7 +611,7 @@ export const QueryValidatorCommissionResponse = {
   },
 };
 
-function createBaseQueryValidatorSlashesRequest(): QueryValidatorSlashesRequest {
+export function createBaseQueryValidatorSlashesRequest(): QueryValidatorSlashesRequest {
   return { validatorAddress: "", startingHeight: 0, endingHeight: 0, pagination: undefined };
 }
 
@@ -691,7 +691,7 @@ export const QueryValidatorSlashesRequest = {
   },
 };
 
-function createBaseQueryValidatorSlashesResponse(): QueryValidatorSlashesResponse {
+export function createBaseQueryValidatorSlashesResponse(): QueryValidatorSlashesResponse {
   return { slashes: [], pagination: undefined };
 }
 
@@ -759,7 +759,7 @@ export const QueryValidatorSlashesResponse = {
   },
 };
 
-function createBaseQueryDelegationRewardsRequest(): QueryDelegationRewardsRequest {
+export function createBaseQueryDelegationRewardsRequest(): QueryDelegationRewardsRequest {
   return { delegatorAddress: "", validatorAddress: "" };
 }
 
@@ -819,7 +819,7 @@ export const QueryDelegationRewardsRequest = {
   },
 };
 
-function createBaseQueryDelegationRewardsResponse(): QueryDelegationRewardsResponse {
+export function createBaseQueryDelegationRewardsResponse(): QueryDelegationRewardsResponse {
   return { rewards: [] };
 }
 
@@ -872,7 +872,7 @@ export const QueryDelegationRewardsResponse = {
   },
 };
 
-function createBaseQueryDelegationTotalRewardsRequest(): QueryDelegationTotalRewardsRequest {
+export function createBaseQueryDelegationTotalRewardsRequest(): QueryDelegationTotalRewardsRequest {
   return { delegatorAddress: "" };
 }
 
@@ -921,7 +921,7 @@ export const QueryDelegationTotalRewardsRequest = {
   },
 };
 
-function createBaseQueryDelegationTotalRewardsResponse(): QueryDelegationTotalRewardsResponse {
+export function createBaseQueryDelegationTotalRewardsResponse(): QueryDelegationTotalRewardsResponse {
   return { rewards: [], total: [] };
 }
 
@@ -991,7 +991,7 @@ export const QueryDelegationTotalRewardsResponse = {
   },
 };
 
-function createBaseQueryDelegatorValidatorsRequest(): QueryDelegatorValidatorsRequest {
+export function createBaseQueryDelegatorValidatorsRequest(): QueryDelegatorValidatorsRequest {
   return { delegatorAddress: "" };
 }
 
@@ -1040,7 +1040,7 @@ export const QueryDelegatorValidatorsRequest = {
   },
 };
 
-function createBaseQueryDelegatorValidatorsResponse(): QueryDelegatorValidatorsResponse {
+export function createBaseQueryDelegatorValidatorsResponse(): QueryDelegatorValidatorsResponse {
   return { validators: [] };
 }
 
@@ -1093,7 +1093,7 @@ export const QueryDelegatorValidatorsResponse = {
   },
 };
 
-function createBaseQueryDelegatorWithdrawAddressRequest(): QueryDelegatorWithdrawAddressRequest {
+export function createBaseQueryDelegatorWithdrawAddressRequest(): QueryDelegatorWithdrawAddressRequest {
   return { delegatorAddress: "" };
 }
 
@@ -1142,7 +1142,7 @@ export const QueryDelegatorWithdrawAddressRequest = {
   },
 };
 
-function createBaseQueryDelegatorWithdrawAddressResponse(): QueryDelegatorWithdrawAddressResponse {
+export function createBaseQueryDelegatorWithdrawAddressResponse(): QueryDelegatorWithdrawAddressResponse {
   return { withdrawAddress: "" };
 }
 
@@ -1191,7 +1191,7 @@ export const QueryDelegatorWithdrawAddressResponse = {
   },
 };
 
-function createBaseQueryCommunityPoolRequest(): QueryCommunityPoolRequest {
+export function createBaseQueryCommunityPoolRequest(): QueryCommunityPoolRequest {
   return {};
 }
 
@@ -1230,7 +1230,7 @@ export const QueryCommunityPoolRequest = {
   },
 };
 
-function createBaseQueryCommunityPoolResponse(): QueryCommunityPoolResponse {
+export function createBaseQueryCommunityPoolResponse(): QueryCommunityPoolResponse {
   return { pool: [] };
 }
 
@@ -1396,14 +1396,15 @@ export class QueryClientImpl implements Query {
   }
 }
 
-interface Rpc {
+export interface Rpc {
   request(service: string, method: string, data: Uint8Array): Promise<Uint8Array>;
 }
 
-declare var self: any | undefined;
-declare var window: any | undefined;
-declare var global: any | undefined;
-var globalThis: any = (() => {
+export declare var self: any | undefined;
+export declare var window: any | undefined;
+export declare var global: any | undefined;
+
+export var globalThis: any = (() => {
   if (typeof globalThis !== "undefined") {
     return globalThis;
   }
@@ -1419,7 +1420,7 @@ var globalThis: any = (() => {
   throw "Unable to locate global object";
 })();
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
+export type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 export type DeepPartial<T> = T extends Builtin
   ? T
@@ -1431,12 +1432,12 @@ export type DeepPartial<T> = T extends Builtin
   ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
-type KeysOfUnion<T> = T extends T ? keyof T : never;
+export type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
 
-function longToNumber(long: Long): number {
+export function longToNumber(long: Long): number {
   if (long.gt(Number.MAX_SAFE_INTEGER)) {
     throw new globalThis.Error("Value is larger than Number.MAX_SAFE_INTEGER");
   }
@@ -1448,6 +1449,6 @@ if (_m0.util.Long !== Long) {
   _m0.configure();
 }
 
-function isSet(value: any): boolean {
+export function isSet(value: any): boolean {
   return value !== null && value !== undefined;
 }

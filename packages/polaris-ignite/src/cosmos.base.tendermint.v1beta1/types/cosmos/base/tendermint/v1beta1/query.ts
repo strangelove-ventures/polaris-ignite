@@ -163,7 +163,7 @@ export interface ProofOps {
   ops: ProofOp[];
 }
 
-function createBaseGetValidatorSetByHeightRequest(): GetValidatorSetByHeightRequest {
+export function createBaseGetValidatorSetByHeightRequest(): GetValidatorSetByHeightRequest {
   return { height: 0, pagination: undefined };
 }
 
@@ -227,7 +227,7 @@ export const GetValidatorSetByHeightRequest = {
   },
 };
 
-function createBaseGetValidatorSetByHeightResponse(): GetValidatorSetByHeightResponse {
+export function createBaseGetValidatorSetByHeightResponse(): GetValidatorSetByHeightResponse {
   return { blockHeight: 0, validators: [], pagination: undefined };
 }
 
@@ -304,7 +304,7 @@ export const GetValidatorSetByHeightResponse = {
   },
 };
 
-function createBaseGetLatestValidatorSetRequest(): GetLatestValidatorSetRequest {
+export function createBaseGetLatestValidatorSetRequest(): GetLatestValidatorSetRequest {
   return { pagination: undefined };
 }
 
@@ -355,7 +355,7 @@ export const GetLatestValidatorSetRequest = {
   },
 };
 
-function createBaseGetLatestValidatorSetResponse(): GetLatestValidatorSetResponse {
+export function createBaseGetLatestValidatorSetResponse(): GetLatestValidatorSetResponse {
   return { blockHeight: 0, validators: [], pagination: undefined };
 }
 
@@ -432,7 +432,7 @@ export const GetLatestValidatorSetResponse = {
   },
 };
 
-function createBaseValidator(): Validator {
+export function createBaseValidator(): Validator {
   return { address: "", pubKey: undefined, votingPower: 0, proposerPriority: 0 };
 }
 
@@ -508,7 +508,7 @@ export const Validator = {
   },
 };
 
-function createBaseGetBlockByHeightRequest(): GetBlockByHeightRequest {
+export function createBaseGetBlockByHeightRequest(): GetBlockByHeightRequest {
   return { height: 0 };
 }
 
@@ -555,7 +555,7 @@ export const GetBlockByHeightRequest = {
   },
 };
 
-function createBaseGetBlockByHeightResponse(): GetBlockByHeightResponse {
+export function createBaseGetBlockByHeightResponse(): GetBlockByHeightResponse {
   return { blockId: undefined, block: undefined, sdkBlock: undefined };
 }
 
@@ -624,7 +624,7 @@ export const GetBlockByHeightResponse = {
   },
 };
 
-function createBaseGetLatestBlockRequest(): GetLatestBlockRequest {
+export function createBaseGetLatestBlockRequest(): GetLatestBlockRequest {
   return {};
 }
 
@@ -663,7 +663,7 @@ export const GetLatestBlockRequest = {
   },
 };
 
-function createBaseGetLatestBlockResponse(): GetLatestBlockResponse {
+export function createBaseGetLatestBlockResponse(): GetLatestBlockResponse {
   return { blockId: undefined, block: undefined, sdkBlock: undefined };
 }
 
@@ -732,7 +732,7 @@ export const GetLatestBlockResponse = {
   },
 };
 
-function createBaseGetSyncingRequest(): GetSyncingRequest {
+export function createBaseGetSyncingRequest(): GetSyncingRequest {
   return {};
 }
 
@@ -771,7 +771,7 @@ export const GetSyncingRequest = {
   },
 };
 
-function createBaseGetSyncingResponse(): GetSyncingResponse {
+export function createBaseGetSyncingResponse(): GetSyncingResponse {
   return { syncing: false };
 }
 
@@ -818,7 +818,7 @@ export const GetSyncingResponse = {
   },
 };
 
-function createBaseGetNodeInfoRequest(): GetNodeInfoRequest {
+export function createBaseGetNodeInfoRequest(): GetNodeInfoRequest {
   return {};
 }
 
@@ -857,7 +857,7 @@ export const GetNodeInfoRequest = {
   },
 };
 
-function createBaseGetNodeInfoResponse(): GetNodeInfoResponse {
+export function createBaseGetNodeInfoResponse(): GetNodeInfoResponse {
   return { defaultNodeInfo: undefined, applicationVersion: undefined };
 }
 
@@ -927,7 +927,7 @@ export const GetNodeInfoResponse = {
   },
 };
 
-function createBaseVersionInfo(): VersionInfo {
+export function createBaseVersionInfo(): VersionInfo {
   return {
     name: "",
     appName: "",
@@ -1052,7 +1052,7 @@ export const VersionInfo = {
   },
 };
 
-function createBaseModule(): Module {
+export function createBaseModule(): Module {
   return { path: "", version: "", sum: "" };
 }
 
@@ -1119,7 +1119,7 @@ export const Module = {
   },
 };
 
-function createBaseABCIQueryRequest(): ABCIQueryRequest {
+export function createBaseABCIQueryRequest(): ABCIQueryRequest {
   return { data: new Uint8Array(), path: "", height: 0, prove: false };
 }
 
@@ -1196,7 +1196,7 @@ export const ABCIQueryRequest = {
   },
 };
 
-function createBaseABCIQueryResponse(): ABCIQueryResponse {
+export function createBaseABCIQueryResponse(): ABCIQueryResponse {
   return {
     code: 0,
     log: "",
@@ -1330,7 +1330,7 @@ export const ABCIQueryResponse = {
   },
 };
 
-function createBaseProofOp(): ProofOp {
+export function createBaseProofOp(): ProofOp {
   return { type: "", key: new Uint8Array(), data: new Uint8Array() };
 }
 
@@ -1399,7 +1399,7 @@ export const ProofOp = {
   },
 };
 
-function createBaseProofOps(): ProofOps {
+export function createBaseProofOps(): ProofOps {
   return { ops: [] };
 }
 
@@ -1529,14 +1529,15 @@ export class ServiceClientImpl implements Service {
   }
 }
 
-interface Rpc {
+export interface Rpc {
   request(service: string, method: string, data: Uint8Array): Promise<Uint8Array>;
 }
 
-declare var self: any | undefined;
-declare var window: any | undefined;
-declare var global: any | undefined;
-var globalThis: any = (() => {
+export declare var self: any | undefined;
+export declare var window: any | undefined;
+export declare var global: any | undefined;
+
+export var globalThis: any = (() => {
   if (typeof globalThis !== "undefined") {
     return globalThis;
   }
@@ -1552,7 +1553,7 @@ var globalThis: any = (() => {
   throw "Unable to locate global object";
 })();
 
-function bytesFromBase64(b64: string): Uint8Array {
+export function bytesFromBase64(b64: string): Uint8Array {
   if (globalThis.Buffer) {
     return Uint8Array.from(globalThis.Buffer.from(b64, "base64"));
   } else {
@@ -1565,7 +1566,7 @@ function bytesFromBase64(b64: string): Uint8Array {
   }
 }
 
-function base64FromBytes(arr: Uint8Array): string {
+export function base64FromBytes(arr: Uint8Array): string {
   if (globalThis.Buffer) {
     return globalThis.Buffer.from(arr).toString("base64");
   } else {
@@ -1577,7 +1578,7 @@ function base64FromBytes(arr: Uint8Array): string {
   }
 }
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
+export type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 export type DeepPartial<T> = T extends Builtin
   ? T
@@ -1589,12 +1590,12 @@ export type DeepPartial<T> = T extends Builtin
   ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
-type KeysOfUnion<T> = T extends T ? keyof T : never;
+export type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
 
-function longToNumber(long: Long): number {
+export function longToNumber(long: Long): number {
   if (long.gt(Number.MAX_SAFE_INTEGER)) {
     throw new globalThis.Error("Value is larger than Number.MAX_SAFE_INTEGER");
   }
@@ -1606,6 +1607,6 @@ if (_m0.util.Long !== Long) {
   _m0.configure();
 }
 
-function isSet(value: any): boolean {
+export function isSet(value: any): boolean {
   return value !== null && value !== undefined;
 }

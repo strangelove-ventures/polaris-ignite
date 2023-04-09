@@ -20,7 +20,7 @@ export interface Entry {
   nfts: NFT[];
 }
 
-function createBaseGenesisState(): GenesisState {
+export function createBaseGenesisState(): GenesisState {
   return { classes: [], entries: [] };
 }
 
@@ -86,7 +86,7 @@ export const GenesisState = {
   },
 };
 
-function createBaseEntry(): Entry {
+export function createBaseEntry(): Entry {
   return { owner: "", nfts: [] };
 }
 
@@ -148,7 +148,7 @@ export const Entry = {
   },
 };
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
+export type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 export type DeepPartial<T> = T extends Builtin
   ? T
@@ -160,11 +160,11 @@ export type DeepPartial<T> = T extends Builtin
   ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
-type KeysOfUnion<T> = T extends T ? keyof T : never;
+export type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
 
-function isSet(value: any): boolean {
+export function isSet(value: any): boolean {
   return value !== null && value !== undefined;
 }

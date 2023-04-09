@@ -63,7 +63,7 @@ export interface MsgCreatePeriodicVestingAccount {
  */
 export interface MsgCreatePeriodicVestingAccountResponse {}
 
-function createBaseMsgCreateVestingAccount(): MsgCreateVestingAccount {
+export function createBaseMsgCreateVestingAccount(): MsgCreateVestingAccount {
   return { fromAddress: "", toAddress: "", amount: [], endTime: 0, delayed: false };
 }
 
@@ -152,7 +152,7 @@ export const MsgCreateVestingAccount = {
   },
 };
 
-function createBaseMsgCreateVestingAccountResponse(): MsgCreateVestingAccountResponse {
+export function createBaseMsgCreateVestingAccountResponse(): MsgCreateVestingAccountResponse {
   return {};
 }
 
@@ -191,7 +191,7 @@ export const MsgCreateVestingAccountResponse = {
   },
 };
 
-function createBaseMsgCreatePermanentLockedAccount(): MsgCreatePermanentLockedAccount {
+export function createBaseMsgCreatePermanentLockedAccount(): MsgCreatePermanentLockedAccount {
   return { fromAddress: "", toAddress: "", amount: [] };
 }
 
@@ -264,7 +264,7 @@ export const MsgCreatePermanentLockedAccount = {
   },
 };
 
-function createBaseMsgCreatePermanentLockedAccountResponse(): MsgCreatePermanentLockedAccountResponse {
+export function createBaseMsgCreatePermanentLockedAccountResponse(): MsgCreatePermanentLockedAccountResponse {
   return {};
 }
 
@@ -305,7 +305,7 @@ export const MsgCreatePermanentLockedAccountResponse = {
   },
 };
 
-function createBaseMsgCreatePeriodicVestingAccount(): MsgCreatePeriodicVestingAccount {
+export function createBaseMsgCreatePeriodicVestingAccount(): MsgCreatePeriodicVestingAccount {
   return { fromAddress: "", toAddress: "", startTime: 0, vestingPeriods: [] };
 }
 
@@ -389,7 +389,7 @@ export const MsgCreatePeriodicVestingAccount = {
   },
 };
 
-function createBaseMsgCreatePeriodicVestingAccountResponse(): MsgCreatePeriodicVestingAccountResponse {
+export function createBaseMsgCreatePeriodicVestingAccountResponse(): MsgCreatePeriodicVestingAccountResponse {
   return {};
 }
 
@@ -488,14 +488,15 @@ export class MsgClientImpl implements Msg {
   }
 }
 
-interface Rpc {
+export interface Rpc {
   request(service: string, method: string, data: Uint8Array): Promise<Uint8Array>;
 }
 
-declare var self: any | undefined;
-declare var window: any | undefined;
-declare var global: any | undefined;
-var globalThis: any = (() => {
+export declare var self: any | undefined;
+export declare var window: any | undefined;
+export declare var global: any | undefined;
+
+export var globalThis: any = (() => {
   if (typeof globalThis !== "undefined") {
     return globalThis;
   }
@@ -511,7 +512,7 @@ var globalThis: any = (() => {
   throw "Unable to locate global object";
 })();
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
+export type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 export type DeepPartial<T> = T extends Builtin
   ? T
@@ -523,12 +524,12 @@ export type DeepPartial<T> = T extends Builtin
   ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
-type KeysOfUnion<T> = T extends T ? keyof T : never;
+export type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
 
-function longToNumber(long: Long): number {
+export function longToNumber(long: Long): number {
   if (long.gt(Number.MAX_SAFE_INTEGER)) {
     throw new globalThis.Error("Value is larger than Number.MAX_SAFE_INTEGER");
   }
@@ -540,6 +541,6 @@ if (_m0.util.Long !== Long) {
   _m0.configure();
 }
 
-function isSet(value: any): boolean {
+export function isSet(value: any): boolean {
   return value !== null && value !== undefined;
 }

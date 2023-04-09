@@ -264,7 +264,7 @@ export interface QueryParamsResponse {
   params: Params | undefined;
 }
 
-function createBaseQueryValidatorsRequest(): QueryValidatorsRequest {
+export function createBaseQueryValidatorsRequest(): QueryValidatorsRequest {
   return { status: "", pagination: undefined };
 }
 
@@ -326,7 +326,7 @@ export const QueryValidatorsRequest = {
   },
 };
 
-function createBaseQueryValidatorsResponse(): QueryValidatorsResponse {
+export function createBaseQueryValidatorsResponse(): QueryValidatorsResponse {
   return { validators: [], pagination: undefined };
 }
 
@@ -392,7 +392,7 @@ export const QueryValidatorsResponse = {
   },
 };
 
-function createBaseQueryValidatorRequest(): QueryValidatorRequest {
+export function createBaseQueryValidatorRequest(): QueryValidatorRequest {
   return { validatorAddr: "" };
 }
 
@@ -439,7 +439,7 @@ export const QueryValidatorRequest = {
   },
 };
 
-function createBaseQueryValidatorResponse(): QueryValidatorResponse {
+export function createBaseQueryValidatorResponse(): QueryValidatorResponse {
   return { validator: undefined };
 }
 
@@ -488,7 +488,7 @@ export const QueryValidatorResponse = {
   },
 };
 
-function createBaseQueryValidatorDelegationsRequest(): QueryValidatorDelegationsRequest {
+export function createBaseQueryValidatorDelegationsRequest(): QueryValidatorDelegationsRequest {
   return { validatorAddr: "", pagination: undefined };
 }
 
@@ -552,7 +552,7 @@ export const QueryValidatorDelegationsRequest = {
   },
 };
 
-function createBaseQueryValidatorDelegationsResponse(): QueryValidatorDelegationsResponse {
+export function createBaseQueryValidatorDelegationsResponse(): QueryValidatorDelegationsResponse {
   return { delegationResponses: [], pagination: undefined };
 }
 
@@ -622,7 +622,7 @@ export const QueryValidatorDelegationsResponse = {
   },
 };
 
-function createBaseQueryValidatorUnbondingDelegationsRequest(): QueryValidatorUnbondingDelegationsRequest {
+export function createBaseQueryValidatorUnbondingDelegationsRequest(): QueryValidatorUnbondingDelegationsRequest {
   return { validatorAddr: "", pagination: undefined };
 }
 
@@ -686,7 +686,7 @@ export const QueryValidatorUnbondingDelegationsRequest = {
   },
 };
 
-function createBaseQueryValidatorUnbondingDelegationsResponse(): QueryValidatorUnbondingDelegationsResponse {
+export function createBaseQueryValidatorUnbondingDelegationsResponse(): QueryValidatorUnbondingDelegationsResponse {
   return { unbondingResponses: [], pagination: undefined };
 }
 
@@ -756,7 +756,7 @@ export const QueryValidatorUnbondingDelegationsResponse = {
   },
 };
 
-function createBaseQueryDelegationRequest(): QueryDelegationRequest {
+export function createBaseQueryDelegationRequest(): QueryDelegationRequest {
   return { delegatorAddr: "", validatorAddr: "" };
 }
 
@@ -814,7 +814,7 @@ export const QueryDelegationRequest = {
   },
 };
 
-function createBaseQueryDelegationResponse(): QueryDelegationResponse {
+export function createBaseQueryDelegationResponse(): QueryDelegationResponse {
   return { delegationResponse: undefined };
 }
 
@@ -871,7 +871,7 @@ export const QueryDelegationResponse = {
   },
 };
 
-function createBaseQueryUnbondingDelegationRequest(): QueryUnbondingDelegationRequest {
+export function createBaseQueryUnbondingDelegationRequest(): QueryUnbondingDelegationRequest {
   return { delegatorAddr: "", validatorAddr: "" };
 }
 
@@ -931,7 +931,7 @@ export const QueryUnbondingDelegationRequest = {
   },
 };
 
-function createBaseQueryUnbondingDelegationResponse(): QueryUnbondingDelegationResponse {
+export function createBaseQueryUnbondingDelegationResponse(): QueryUnbondingDelegationResponse {
   return { unbond: undefined };
 }
 
@@ -984,7 +984,7 @@ export const QueryUnbondingDelegationResponse = {
   },
 };
 
-function createBaseQueryDelegatorDelegationsRequest(): QueryDelegatorDelegationsRequest {
+export function createBaseQueryDelegatorDelegationsRequest(): QueryDelegatorDelegationsRequest {
   return { delegatorAddr: "", pagination: undefined };
 }
 
@@ -1048,7 +1048,7 @@ export const QueryDelegatorDelegationsRequest = {
   },
 };
 
-function createBaseQueryDelegatorDelegationsResponse(): QueryDelegatorDelegationsResponse {
+export function createBaseQueryDelegatorDelegationsResponse(): QueryDelegatorDelegationsResponse {
   return { delegationResponses: [], pagination: undefined };
 }
 
@@ -1118,7 +1118,7 @@ export const QueryDelegatorDelegationsResponse = {
   },
 };
 
-function createBaseQueryDelegatorUnbondingDelegationsRequest(): QueryDelegatorUnbondingDelegationsRequest {
+export function createBaseQueryDelegatorUnbondingDelegationsRequest(): QueryDelegatorUnbondingDelegationsRequest {
   return { delegatorAddr: "", pagination: undefined };
 }
 
@@ -1182,7 +1182,7 @@ export const QueryDelegatorUnbondingDelegationsRequest = {
   },
 };
 
-function createBaseQueryDelegatorUnbondingDelegationsResponse(): QueryDelegatorUnbondingDelegationsResponse {
+export function createBaseQueryDelegatorUnbondingDelegationsResponse(): QueryDelegatorUnbondingDelegationsResponse {
   return { unbondingResponses: [], pagination: undefined };
 }
 
@@ -1252,7 +1252,7 @@ export const QueryDelegatorUnbondingDelegationsResponse = {
   },
 };
 
-function createBaseQueryRedelegationsRequest(): QueryRedelegationsRequest {
+export function createBaseQueryRedelegationsRequest(): QueryRedelegationsRequest {
   return { delegatorAddr: "", srcValidatorAddr: "", dstValidatorAddr: "", pagination: undefined };
 }
 
@@ -1332,7 +1332,7 @@ export const QueryRedelegationsRequest = {
   },
 };
 
-function createBaseQueryRedelegationsResponse(): QueryRedelegationsResponse {
+export function createBaseQueryRedelegationsResponse(): QueryRedelegationsResponse {
   return { redelegationResponses: [], pagination: undefined };
 }
 
@@ -1402,7 +1402,7 @@ export const QueryRedelegationsResponse = {
   },
 };
 
-function createBaseQueryDelegatorValidatorsRequest(): QueryDelegatorValidatorsRequest {
+export function createBaseQueryDelegatorValidatorsRequest(): QueryDelegatorValidatorsRequest {
   return { delegatorAddr: "", pagination: undefined };
 }
 
@@ -1466,7 +1466,7 @@ export const QueryDelegatorValidatorsRequest = {
   },
 };
 
-function createBaseQueryDelegatorValidatorsResponse(): QueryDelegatorValidatorsResponse {
+export function createBaseQueryDelegatorValidatorsResponse(): QueryDelegatorValidatorsResponse {
   return { validators: [], pagination: undefined };
 }
 
@@ -1534,7 +1534,7 @@ export const QueryDelegatorValidatorsResponse = {
   },
 };
 
-function createBaseQueryDelegatorValidatorRequest(): QueryDelegatorValidatorRequest {
+export function createBaseQueryDelegatorValidatorRequest(): QueryDelegatorValidatorRequest {
   return { delegatorAddr: "", validatorAddr: "" };
 }
 
@@ -1594,7 +1594,7 @@ export const QueryDelegatorValidatorRequest = {
   },
 };
 
-function createBaseQueryDelegatorValidatorResponse(): QueryDelegatorValidatorResponse {
+export function createBaseQueryDelegatorValidatorResponse(): QueryDelegatorValidatorResponse {
   return { validator: undefined };
 }
 
@@ -1645,7 +1645,7 @@ export const QueryDelegatorValidatorResponse = {
   },
 };
 
-function createBaseQueryHistoricalInfoRequest(): QueryHistoricalInfoRequest {
+export function createBaseQueryHistoricalInfoRequest(): QueryHistoricalInfoRequest {
   return { height: 0 };
 }
 
@@ -1692,7 +1692,7 @@ export const QueryHistoricalInfoRequest = {
   },
 };
 
-function createBaseQueryHistoricalInfoResponse(): QueryHistoricalInfoResponse {
+export function createBaseQueryHistoricalInfoResponse(): QueryHistoricalInfoResponse {
   return { hist: undefined };
 }
 
@@ -1740,7 +1740,7 @@ export const QueryHistoricalInfoResponse = {
   },
 };
 
-function createBaseQueryPoolRequest(): QueryPoolRequest {
+export function createBaseQueryPoolRequest(): QueryPoolRequest {
   return {};
 }
 
@@ -1779,7 +1779,7 @@ export const QueryPoolRequest = {
   },
 };
 
-function createBaseQueryPoolResponse(): QueryPoolResponse {
+export function createBaseQueryPoolResponse(): QueryPoolResponse {
   return { pool: undefined };
 }
 
@@ -1826,7 +1826,7 @@ export const QueryPoolResponse = {
   },
 };
 
-function createBaseQueryParamsRequest(): QueryParamsRequest {
+export function createBaseQueryParamsRequest(): QueryParamsRequest {
   return {};
 }
 
@@ -1865,7 +1865,7 @@ export const QueryParamsRequest = {
   },
 };
 
-function createBaseQueryParamsResponse(): QueryParamsResponse {
+export function createBaseQueryParamsResponse(): QueryParamsResponse {
   return { params: undefined };
 }
 
@@ -2100,14 +2100,15 @@ export class QueryClientImpl implements Query {
   }
 }
 
-interface Rpc {
+export interface Rpc {
   request(service: string, method: string, data: Uint8Array): Promise<Uint8Array>;
 }
 
-declare var self: any | undefined;
-declare var window: any | undefined;
-declare var global: any | undefined;
-var globalThis: any = (() => {
+export declare var self: any | undefined;
+export declare var window: any | undefined;
+export declare var global: any | undefined;
+
+export var globalThis: any = (() => {
   if (typeof globalThis !== "undefined") {
     return globalThis;
   }
@@ -2123,7 +2124,7 @@ var globalThis: any = (() => {
   throw "Unable to locate global object";
 })();
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
+export type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 export type DeepPartial<T> = T extends Builtin
   ? T
@@ -2135,12 +2136,12 @@ export type DeepPartial<T> = T extends Builtin
   ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
-type KeysOfUnion<T> = T extends T ? keyof T : never;
+export type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
 
-function longToNumber(long: Long): number {
+export function longToNumber(long: Long): number {
   if (long.gt(Number.MAX_SAFE_INTEGER)) {
     throw new globalThis.Error("Value is larger than Number.MAX_SAFE_INTEGER");
   }
@@ -2152,6 +2153,6 @@ if (_m0.util.Long !== Long) {
   _m0.configure();
 }
 
-function isSet(value: any): boolean {
+export function isSet(value: any): boolean {
   return value !== null && value !== undefined;
 }

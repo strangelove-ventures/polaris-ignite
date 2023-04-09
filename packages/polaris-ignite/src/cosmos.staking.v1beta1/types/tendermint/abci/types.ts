@@ -609,7 +609,7 @@ export interface Snapshot {
   metadata: Uint8Array;
 }
 
-function createBaseRequest(): Request {
+export function createBaseRequest(): Request {
   return {
     echo: undefined,
     flush: undefined,
@@ -871,7 +871,7 @@ export const Request = {
   },
 };
 
-function createBaseRequestEcho(): RequestEcho {
+export function createBaseRequestEcho(): RequestEcho {
   return { message: "" };
 }
 
@@ -918,7 +918,7 @@ export const RequestEcho = {
   },
 };
 
-function createBaseRequestFlush(): RequestFlush {
+export function createBaseRequestFlush(): RequestFlush {
   return {};
 }
 
@@ -957,7 +957,7 @@ export const RequestFlush = {
   },
 };
 
-function createBaseRequestInfo(): RequestInfo {
+export function createBaseRequestInfo(): RequestInfo {
   return { version: "", blockVersion: 0, p2pVersion: 0, abciVersion: "" };
 }
 
@@ -1033,7 +1033,7 @@ export const RequestInfo = {
   },
 };
 
-function createBaseRequestInitChain(): RequestInitChain {
+export function createBaseRequestInitChain(): RequestInitChain {
   return {
     time: undefined,
     chainId: "",
@@ -1147,7 +1147,7 @@ export const RequestInitChain = {
   },
 };
 
-function createBaseRequestQuery(): RequestQuery {
+export function createBaseRequestQuery(): RequestQuery {
   return { data: new Uint8Array(), path: "", height: 0, prove: false };
 }
 
@@ -1224,7 +1224,7 @@ export const RequestQuery = {
   },
 };
 
-function createBaseRequestBeginBlock(): RequestBeginBlock {
+export function createBaseRequestBeginBlock(): RequestBeginBlock {
   return { hash: new Uint8Array(), header: undefined, lastCommitInfo: undefined, byzantineValidators: [] };
 }
 
@@ -1312,7 +1312,7 @@ export const RequestBeginBlock = {
   },
 };
 
-function createBaseRequestCheckTx(): RequestCheckTx {
+export function createBaseRequestCheckTx(): RequestCheckTx {
   return { tx: new Uint8Array(), type: 0 };
 }
 
@@ -1370,7 +1370,7 @@ export const RequestCheckTx = {
   },
 };
 
-function createBaseRequestDeliverTx(): RequestDeliverTx {
+export function createBaseRequestDeliverTx(): RequestDeliverTx {
   return { tx: new Uint8Array() };
 }
 
@@ -1417,7 +1417,7 @@ export const RequestDeliverTx = {
   },
 };
 
-function createBaseRequestEndBlock(): RequestEndBlock {
+export function createBaseRequestEndBlock(): RequestEndBlock {
   return { height: 0 };
 }
 
@@ -1464,7 +1464,7 @@ export const RequestEndBlock = {
   },
 };
 
-function createBaseRequestCommit(): RequestCommit {
+export function createBaseRequestCommit(): RequestCommit {
   return {};
 }
 
@@ -1503,7 +1503,7 @@ export const RequestCommit = {
   },
 };
 
-function createBaseRequestListSnapshots(): RequestListSnapshots {
+export function createBaseRequestListSnapshots(): RequestListSnapshots {
   return {};
 }
 
@@ -1542,7 +1542,7 @@ export const RequestListSnapshots = {
   },
 };
 
-function createBaseRequestOfferSnapshot(): RequestOfferSnapshot {
+export function createBaseRequestOfferSnapshot(): RequestOfferSnapshot {
   return { snapshot: undefined, appHash: new Uint8Array() };
 }
 
@@ -1602,7 +1602,7 @@ export const RequestOfferSnapshot = {
   },
 };
 
-function createBaseRequestLoadSnapshotChunk(): RequestLoadSnapshotChunk {
+export function createBaseRequestLoadSnapshotChunk(): RequestLoadSnapshotChunk {
   return { height: 0, format: 0, chunk: 0 };
 }
 
@@ -1669,7 +1669,7 @@ export const RequestLoadSnapshotChunk = {
   },
 };
 
-function createBaseRequestApplySnapshotChunk(): RequestApplySnapshotChunk {
+export function createBaseRequestApplySnapshotChunk(): RequestApplySnapshotChunk {
   return { index: 0, chunk: new Uint8Array(), sender: "" };
 }
 
@@ -1737,7 +1737,7 @@ export const RequestApplySnapshotChunk = {
   },
 };
 
-function createBaseRequestPrepareProposal(): RequestPrepareProposal {
+export function createBaseRequestPrepareProposal(): RequestPrepareProposal {
   return {
     maxTxBytes: 0,
     txs: [],
@@ -1880,7 +1880,7 @@ export const RequestPrepareProposal = {
   },
 };
 
-function createBaseRequestProcessProposal(): RequestProcessProposal {
+export function createBaseRequestProcessProposal(): RequestProcessProposal {
   return {
     txs: [],
     proposedLastCommit: undefined,
@@ -2024,7 +2024,7 @@ export const RequestProcessProposal = {
   },
 };
 
-function createBaseResponse(): Response {
+export function createBaseResponse(): Response {
   return {
     exception: undefined,
     echo: undefined,
@@ -2302,7 +2302,7 @@ export const Response = {
   },
 };
 
-function createBaseResponseException(): ResponseException {
+export function createBaseResponseException(): ResponseException {
   return { error: "" };
 }
 
@@ -2349,7 +2349,7 @@ export const ResponseException = {
   },
 };
 
-function createBaseResponseEcho(): ResponseEcho {
+export function createBaseResponseEcho(): ResponseEcho {
   return { message: "" };
 }
 
@@ -2396,7 +2396,7 @@ export const ResponseEcho = {
   },
 };
 
-function createBaseResponseFlush(): ResponseFlush {
+export function createBaseResponseFlush(): ResponseFlush {
   return {};
 }
 
@@ -2435,7 +2435,7 @@ export const ResponseFlush = {
   },
 };
 
-function createBaseResponseInfo(): ResponseInfo {
+export function createBaseResponseInfo(): ResponseInfo {
   return { data: "", version: "", appVersion: 0, lastBlockHeight: 0, lastBlockAppHash: new Uint8Array() };
 }
 
@@ -2523,7 +2523,7 @@ export const ResponseInfo = {
   },
 };
 
-function createBaseResponseInitChain(): ResponseInitChain {
+export function createBaseResponseInitChain(): ResponseInitChain {
   return { consensusParams: undefined, validators: [], appHash: new Uint8Array() };
 }
 
@@ -2601,7 +2601,7 @@ export const ResponseInitChain = {
   },
 };
 
-function createBaseResponseQuery(): ResponseQuery {
+export function createBaseResponseQuery(): ResponseQuery {
   return {
     code: 0,
     log: "",
@@ -2735,7 +2735,7 @@ export const ResponseQuery = {
   },
 };
 
-function createBaseResponseBeginBlock(): ResponseBeginBlock {
+export function createBaseResponseBeginBlock(): ResponseBeginBlock {
   return { events: [] };
 }
 
@@ -2786,7 +2786,7 @@ export const ResponseBeginBlock = {
   },
 };
 
-function createBaseResponseCheckTx(): ResponseCheckTx {
+export function createBaseResponseCheckTx(): ResponseCheckTx {
   return {
     code: 0,
     data: new Uint8Array(),
@@ -2942,7 +2942,7 @@ export const ResponseCheckTx = {
   },
 };
 
-function createBaseResponseDeliverTx(): ResponseDeliverTx {
+export function createBaseResponseDeliverTx(): ResponseDeliverTx {
   return { code: 0, data: new Uint8Array(), log: "", info: "", gasWanted: 0, gasUsed: 0, events: [], codespace: "" };
 }
 
@@ -3059,7 +3059,7 @@ export const ResponseDeliverTx = {
   },
 };
 
-function createBaseResponseEndBlock(): ResponseEndBlock {
+export function createBaseResponseEndBlock(): ResponseEndBlock {
   return { validatorUpdates: [], consensusParamUpdates: undefined, events: [] };
 }
 
@@ -3144,7 +3144,7 @@ export const ResponseEndBlock = {
   },
 };
 
-function createBaseResponseCommit(): ResponseCommit {
+export function createBaseResponseCommit(): ResponseCommit {
   return { data: new Uint8Array(), retainHeight: 0 };
 }
 
@@ -3203,7 +3203,7 @@ export const ResponseCommit = {
   },
 };
 
-function createBaseResponseListSnapshots(): ResponseListSnapshots {
+export function createBaseResponseListSnapshots(): ResponseListSnapshots {
   return { snapshots: [] };
 }
 
@@ -3256,7 +3256,7 @@ export const ResponseListSnapshots = {
   },
 };
 
-function createBaseResponseOfferSnapshot(): ResponseOfferSnapshot {
+export function createBaseResponseOfferSnapshot(): ResponseOfferSnapshot {
   return { result: 0 };
 }
 
@@ -3303,7 +3303,7 @@ export const ResponseOfferSnapshot = {
   },
 };
 
-function createBaseResponseLoadSnapshotChunk(): ResponseLoadSnapshotChunk {
+export function createBaseResponseLoadSnapshotChunk(): ResponseLoadSnapshotChunk {
   return { chunk: new Uint8Array() };
 }
 
@@ -3351,7 +3351,7 @@ export const ResponseLoadSnapshotChunk = {
   },
 };
 
-function createBaseResponseApplySnapshotChunk(): ResponseApplySnapshotChunk {
+export function createBaseResponseApplySnapshotChunk(): ResponseApplySnapshotChunk {
   return { result: 0, refetchChunks: [], rejectSenders: [] };
 }
 
@@ -3435,7 +3435,7 @@ export const ResponseApplySnapshotChunk = {
   },
 };
 
-function createBaseResponsePrepareProposal(): ResponsePrepareProposal {
+export function createBaseResponsePrepareProposal(): ResponsePrepareProposal {
   return { txs: [] };
 }
 
@@ -3486,7 +3486,7 @@ export const ResponsePrepareProposal = {
   },
 };
 
-function createBaseResponseProcessProposal(): ResponseProcessProposal {
+export function createBaseResponseProcessProposal(): ResponseProcessProposal {
   return { status: 0 };
 }
 
@@ -3533,7 +3533,7 @@ export const ResponseProcessProposal = {
   },
 };
 
-function createBaseCommitInfo(): CommitInfo {
+export function createBaseCommitInfo(): CommitInfo {
   return { round: 0, votes: [] };
 }
 
@@ -3595,7 +3595,7 @@ export const CommitInfo = {
   },
 };
 
-function createBaseExtendedCommitInfo(): ExtendedCommitInfo {
+export function createBaseExtendedCommitInfo(): ExtendedCommitInfo {
   return { round: 0, votes: [] };
 }
 
@@ -3657,7 +3657,7 @@ export const ExtendedCommitInfo = {
   },
 };
 
-function createBaseEvent(): Event {
+export function createBaseEvent(): Event {
   return { type: "", attributes: [] };
 }
 
@@ -3721,7 +3721,7 @@ export const Event = {
   },
 };
 
-function createBaseEventAttribute(): EventAttribute {
+export function createBaseEventAttribute(): EventAttribute {
   return { key: "", value: "", index: false };
 }
 
@@ -3788,7 +3788,7 @@ export const EventAttribute = {
   },
 };
 
-function createBaseTxResult(): TxResult {
+export function createBaseTxResult(): TxResult {
   return { height: 0, index: 0, tx: new Uint8Array(), result: undefined };
 }
 
@@ -3866,7 +3866,7 @@ export const TxResult = {
   },
 };
 
-function createBaseValidator(): Validator {
+export function createBaseValidator(): Validator {
   return { address: new Uint8Array(), power: 0 };
 }
 
@@ -3925,7 +3925,7 @@ export const Validator = {
   },
 };
 
-function createBaseValidatorUpdate(): ValidatorUpdate {
+export function createBaseValidatorUpdate(): ValidatorUpdate {
   return { pubKey: undefined, power: 0 };
 }
 
@@ -3984,7 +3984,7 @@ export const ValidatorUpdate = {
   },
 };
 
-function createBaseVoteInfo(): VoteInfo {
+export function createBaseVoteInfo(): VoteInfo {
   return { validator: undefined, signedLastBlock: false };
 }
 
@@ -4044,7 +4044,7 @@ export const VoteInfo = {
   },
 };
 
-function createBaseExtendedVoteInfo(): ExtendedVoteInfo {
+export function createBaseExtendedVoteInfo(): ExtendedVoteInfo {
   return { validator: undefined, signedLastBlock: false, voteExtension: new Uint8Array() };
 }
 
@@ -4116,7 +4116,7 @@ export const ExtendedVoteInfo = {
   },
 };
 
-function createBaseMisbehavior(): Misbehavior {
+export function createBaseMisbehavior(): Misbehavior {
   return { type: 0, validator: undefined, height: 0, time: undefined, totalVotingPower: 0 };
 }
 
@@ -4203,7 +4203,7 @@ export const Misbehavior = {
   },
 };
 
-function createBaseSnapshot(): Snapshot {
+export function createBaseSnapshot(): Snapshot {
   return { height: 0, format: 0, chunks: 0, hash: new Uint8Array(), metadata: new Uint8Array() };
 }
 
@@ -4427,14 +4427,15 @@ export class ABCIApplicationClientImpl implements ABCIApplication {
   }
 }
 
-interface Rpc {
+export interface Rpc {
   request(service: string, method: string, data: Uint8Array): Promise<Uint8Array>;
 }
 
-declare var self: any | undefined;
-declare var window: any | undefined;
-declare var global: any | undefined;
-var globalThis: any = (() => {
+export declare var self: any | undefined;
+export declare var window: any | undefined;
+export declare var global: any | undefined;
+
+export var globalThis: any = (() => {
   if (typeof globalThis !== "undefined") {
     return globalThis;
   }
@@ -4450,7 +4451,7 @@ var globalThis: any = (() => {
   throw "Unable to locate global object";
 })();
 
-function bytesFromBase64(b64: string): Uint8Array {
+export function bytesFromBase64(b64: string): Uint8Array {
   if (globalThis.Buffer) {
     return Uint8Array.from(globalThis.Buffer.from(b64, "base64"));
   } else {
@@ -4463,7 +4464,7 @@ function bytesFromBase64(b64: string): Uint8Array {
   }
 }
 
-function base64FromBytes(arr: Uint8Array): string {
+export function base64FromBytes(arr: Uint8Array): string {
   if (globalThis.Buffer) {
     return globalThis.Buffer.from(arr).toString("base64");
   } else {
@@ -4475,7 +4476,7 @@ function base64FromBytes(arr: Uint8Array): string {
   }
 }
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
+export type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 export type DeepPartial<T> = T extends Builtin
   ? T
@@ -4487,24 +4488,24 @@ export type DeepPartial<T> = T extends Builtin
   ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
-type KeysOfUnion<T> = T extends T ? keyof T : never;
+export type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
 
-function toTimestamp(date: Date): Timestamp {
+export function toTimestamp(date: Date): Timestamp {
   const seconds = date.getTime() / 1_000;
   const nanos = (date.getTime() % 1_000) * 1_000_000;
   return { seconds, nanos };
 }
 
-function fromTimestamp(t: Timestamp): Date {
+export function fromTimestamp(t: Timestamp): Date {
   let millis = t.seconds * 1_000;
   millis += t.nanos / 1_000_000;
   return new Date(millis);
 }
 
-function fromJsonTimestamp(o: any): Date {
+export function fromJsonTimestamp(o: any): Date {
   if (o instanceof Date) {
     return o;
   } else if (typeof o === "string") {
@@ -4514,7 +4515,7 @@ function fromJsonTimestamp(o: any): Date {
   }
 }
 
-function longToNumber(long: Long): number {
+export function longToNumber(long: Long): number {
   if (long.gt(Number.MAX_SAFE_INTEGER)) {
     throw new globalThis.Error("Value is larger than Number.MAX_SAFE_INTEGER");
   }
@@ -4526,6 +4527,6 @@ if (_m0.util.Long !== Long) {
   _m0.configure();
 }
 
-function isSet(value: any): boolean {
+export function isSet(value: any): boolean {
   return value !== null && value !== undefined;
 }

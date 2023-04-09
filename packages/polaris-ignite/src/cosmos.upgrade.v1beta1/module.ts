@@ -13,16 +13,10 @@ import { Plan as typePlan } from "./types";
 import { SoftwareUpgradeProposal as typeSoftwareUpgradeProposal } from "./types";
 import { CancelSoftwareUpgradeProposal as typeCancelSoftwareUpgradeProposal } from "./types";
 import { ModuleVersion as typeModuleVersion } from "./types";
-import { MsgSoftwareUpgrade } from "./types/cosmos/upgrade/v1beta1/tx";
 import { MsgCancelUpgrade } from "./types/cosmos/upgrade/v1beta1/tx";
+import { MsgSoftwareUpgrade } from "./types/cosmos/upgrade/v1beta1/tx";
 
 export { MsgCancelUpgrade, MsgSoftwareUpgrade };
-
-export interface sendMsgSoftwareUpgradeParams {
-  value: MsgSoftwareUpgrade;
-  fee?: StdFee;
-  memo?: string;
-}
 
 export interface sendMsgCancelUpgradeParams {
   value: MsgCancelUpgrade;
@@ -30,12 +24,18 @@ export interface sendMsgCancelUpgradeParams {
   memo?: string;
 }
 
-export interface msgSoftwareUpgradeParams {
+export interface sendMsgSoftwareUpgradeParams {
   value: MsgSoftwareUpgrade;
+  fee?: StdFee;
+  memo?: string;
 }
 
 export interface msgCancelUpgradeParams {
   value: MsgCancelUpgrade;
+}
+
+export interface msgSoftwareUpgradeParams {
+  value: MsgSoftwareUpgrade;
 }
 
 export const registry = new Registry(msgTypes);
@@ -45,7 +45,7 @@ export interface Field {
   type: unknown;
 }
 
-const getStructure = (template) => {
+export const getStructure = (template) => {
   const structure: { fields: Field[] } = { fields: [] };
   for (const [key, value] of Object.entries(template)) {
     const field = { name: key, type: typeof value };
@@ -53,7 +53,8 @@ const getStructure = (template) => {
   }
   return structure;
 };
-const defaultFee = {
+
+export const defaultFee = {
   amount: [],
   gas: "200000",
 };
@@ -68,22 +69,6 @@ export const txClient = (
   { signer, prefix, addr }: TxClientOptions = { addr: "http://localhost:26657", prefix: "cosmos" },
 ) => {
   return {
-    async sendMsgSoftwareUpgrade({ value, fee, memo }: sendMsgSoftwareUpgradeParams): Promise<DeliverTxResponse> {
-      if (!signer) {
-        throw new Error("TxClient:sendMsgSoftwareUpgrade: Unable to sign Tx. Signer is not present.");
-      }
-      try {
-        const { address } = (await signer.getAccounts())[0];
-        const signingClient = await SigningStargateClient.connectWithSigner(addr, signer, {
-          registry,
-        });
-        const msg = this.msgSoftwareUpgrade({ value: MsgSoftwareUpgrade.fromPartial(value) });
-        return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo);
-      } catch (e: any) {
-        throw new Error(`TxClient:sendMsgSoftwareUpgrade: Could not broadcast Tx: ${e.message}`);
-      }
-    },
-
     async sendMsgCancelUpgrade({ value, fee, memo }: sendMsgCancelUpgradeParams): Promise<DeliverTxResponse> {
       if (!signer) {
         throw new Error("TxClient:sendMsgCancelUpgrade: Unable to sign Tx. Signer is not present.");
@@ -100,11 +85,19 @@ export const txClient = (
       }
     },
 
-    msgSoftwareUpgrade: ({ value }: msgSoftwareUpgradeParams): EncodeObject => {
+    async sendMsgSoftwareUpgrade({ value, fee, memo }: sendMsgSoftwareUpgradeParams): Promise<DeliverTxResponse> {
+      if (!signer) {
+        throw new Error("TxClient:sendMsgSoftwareUpgrade: Unable to sign Tx. Signer is not present.");
+      }
       try {
-        return { typeUrl: "/cosmos.upgrade.v1beta1.MsgSoftwareUpgrade", value: MsgSoftwareUpgrade.fromPartial(value) };
+        const { address } = (await signer.getAccounts())[0];
+        const signingClient = await SigningStargateClient.connectWithSigner(addr, signer, {
+          registry,
+        });
+        const msg = this.msgSoftwareUpgrade({ value: MsgSoftwareUpgrade.fromPartial(value) });
+        return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo);
       } catch (e: any) {
-        throw new Error(`TxClient:MsgSoftwareUpgrade: Could not create message: ${e.message}`);
+        throw new Error(`TxClient:sendMsgSoftwareUpgrade: Could not broadcast Tx: ${e.message}`);
       }
     },
 
@@ -113,6 +106,14 @@ export const txClient = (
         return { typeUrl: "/cosmos.upgrade.v1beta1.MsgCancelUpgrade", value: MsgCancelUpgrade.fromPartial(value) };
       } catch (e: any) {
         throw new Error(`TxClient:MsgCancelUpgrade: Could not create message: ${e.message}`);
+      }
+    },
+
+    msgSoftwareUpgrade: ({ value }: msgSoftwareUpgradeParams): EncodeObject => {
+      try {
+        return { typeUrl: "/cosmos.upgrade.v1beta1.MsgSoftwareUpgrade", value: MsgSoftwareUpgrade.fromPartial(value) };
+      } catch (e: any) {
+        throw new Error(`TxClient:MsgSoftwareUpgrade: Could not create message: ${e.message}`);
       }
     },
   };
@@ -159,7 +160,7 @@ export class SDKModule {
   }
 }
 
-const Module = (test: IgniteClient) => {
+export const Module = (test: IgniteClient) => {
   return {
     module: {
       CosmosUpgradeV1Beta1: new SDKModule(test),
@@ -167,4 +168,5 @@ const Module = (test: IgniteClient) => {
     registry: msgTypes,
   };
 };
+
 export default Module;

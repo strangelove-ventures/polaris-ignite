@@ -113,7 +113,7 @@ export interface Metadata {
   uriHash: string;
 }
 
-function createBaseParams(): Params {
+export function createBaseParams(): Params {
   return { sendEnabled: [], defaultSendEnabled: false };
 }
 
@@ -177,7 +177,7 @@ export const Params = {
   },
 };
 
-function createBaseSendEnabled(): SendEnabled {
+export function createBaseSendEnabled(): SendEnabled {
   return { denom: "", enabled: false };
 }
 
@@ -235,7 +235,7 @@ export const SendEnabled = {
   },
 };
 
-function createBaseInput(): Input {
+export function createBaseInput(): Input {
   return { address: "", coins: [] };
 }
 
@@ -297,7 +297,7 @@ export const Input = {
   },
 };
 
-function createBaseOutput(): Output {
+export function createBaseOutput(): Output {
   return { address: "", coins: [] };
 }
 
@@ -359,7 +359,7 @@ export const Output = {
   },
 };
 
-function createBaseSupply(): Supply {
+export function createBaseSupply(): Supply {
   return { total: [] };
 }
 
@@ -410,7 +410,7 @@ export const Supply = {
   },
 };
 
-function createBaseDenomUnit(): DenomUnit {
+export function createBaseDenomUnit(): DenomUnit {
   return { denom: "", exponent: 0, aliases: [] };
 }
 
@@ -481,7 +481,7 @@ export const DenomUnit = {
   },
 };
 
-function createBaseMetadata(): Metadata {
+export function createBaseMetadata(): Metadata {
   return { description: "", denomUnits: [], base: "", display: "", name: "", symbol: "", uri: "", uriHash: "" };
 }
 
@@ -597,7 +597,7 @@ export const Metadata = {
   },
 };
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
+export type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 export type DeepPartial<T> = T extends Builtin
   ? T
@@ -609,11 +609,11 @@ export type DeepPartial<T> = T extends Builtin
   ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
-type KeysOfUnion<T> = T extends T ? keyof T : never;
+export type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
 
-function isSet(value: any): boolean {
+export function isSet(value: any): boolean {
   return value !== null && value !== undefined;
 }

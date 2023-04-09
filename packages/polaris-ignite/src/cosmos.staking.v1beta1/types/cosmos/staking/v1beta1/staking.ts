@@ -365,7 +365,7 @@ export interface ValidatorUpdates {
   updates: ValidatorUpdate[];
 }
 
-function createBaseHistoricalInfo(): HistoricalInfo {
+export function createBaseHistoricalInfo(): HistoricalInfo {
   return { header: undefined, valset: [] };
 }
 
@@ -428,7 +428,7 @@ export const HistoricalInfo = {
   },
 };
 
-function createBaseCommissionRates(): CommissionRates {
+export function createBaseCommissionRates(): CommissionRates {
   return { rate: "", maxRate: "", maxChangeRate: "" };
 }
 
@@ -495,7 +495,7 @@ export const CommissionRates = {
   },
 };
 
-function createBaseCommission(): Commission {
+export function createBaseCommission(): Commission {
   return { commissionRates: undefined, updateTime: undefined };
 }
 
@@ -557,7 +557,7 @@ export const Commission = {
   },
 };
 
-function createBaseDescription(): Description {
+export function createBaseDescription(): Description {
   return { moniker: "", identity: "", website: "", securityContact: "", details: "" };
 }
 
@@ -642,7 +642,7 @@ export const Description = {
   },
 };
 
-function createBaseValidator(): Validator {
+export function createBaseValidator(): Validator {
   return {
     operatorAddress: "",
     consensusPubkey: undefined,
@@ -839,7 +839,7 @@ export const Validator = {
   },
 };
 
-function createBaseValAddresses(): ValAddresses {
+export function createBaseValAddresses(): ValAddresses {
   return { addresses: [] };
 }
 
@@ -890,7 +890,7 @@ export const ValAddresses = {
   },
 };
 
-function createBaseDVPair(): DVPair {
+export function createBaseDVPair(): DVPair {
   return { delegatorAddress: "", validatorAddress: "" };
 }
 
@@ -948,7 +948,7 @@ export const DVPair = {
   },
 };
 
-function createBaseDVPairs(): DVPairs {
+export function createBaseDVPairs(): DVPairs {
   return { pairs: [] };
 }
 
@@ -999,7 +999,7 @@ export const DVPairs = {
   },
 };
 
-function createBaseDVVTriplet(): DVVTriplet {
+export function createBaseDVVTriplet(): DVVTriplet {
   return { delegatorAddress: "", validatorSrcAddress: "", validatorDstAddress: "" };
 }
 
@@ -1066,7 +1066,7 @@ export const DVVTriplet = {
   },
 };
 
-function createBaseDVVTriplets(): DVVTriplets {
+export function createBaseDVVTriplets(): DVVTriplets {
   return { triplets: [] };
 }
 
@@ -1117,7 +1117,7 @@ export const DVVTriplets = {
   },
 };
 
-function createBaseDelegation(): Delegation {
+export function createBaseDelegation(): Delegation {
   return { delegatorAddress: "", validatorAddress: "", shares: "" };
 }
 
@@ -1184,7 +1184,7 @@ export const Delegation = {
   },
 };
 
-function createBaseUnbondingDelegation(): UnbondingDelegation {
+export function createBaseUnbondingDelegation(): UnbondingDelegation {
   return { delegatorAddress: "", validatorAddress: "", entries: [] };
 }
 
@@ -1257,7 +1257,7 @@ export const UnbondingDelegation = {
   },
 };
 
-function createBaseUnbondingDelegationEntry(): UnbondingDelegationEntry {
+export function createBaseUnbondingDelegationEntry(): UnbondingDelegationEntry {
   return {
     creationHeight: 0,
     completionTime: undefined,
@@ -1359,7 +1359,7 @@ export const UnbondingDelegationEntry = {
   },
 };
 
-function createBaseRedelegationEntry(): RedelegationEntry {
+export function createBaseRedelegationEntry(): RedelegationEntry {
   return {
     creationHeight: 0,
     completionTime: undefined,
@@ -1461,7 +1461,7 @@ export const RedelegationEntry = {
   },
 };
 
-function createBaseRedelegation(): Redelegation {
+export function createBaseRedelegation(): Redelegation {
   return { delegatorAddress: "", validatorSrcAddress: "", validatorDstAddress: "", entries: [] };
 }
 
@@ -1541,7 +1541,7 @@ export const Redelegation = {
   },
 };
 
-function createBaseParams(): Params {
+export function createBaseParams(): Params {
   return {
     unbondingTime: undefined,
     maxValidators: 0,
@@ -1646,7 +1646,7 @@ export const Params = {
   },
 };
 
-function createBaseDelegationResponse(): DelegationResponse {
+export function createBaseDelegationResponse(): DelegationResponse {
   return { delegation: undefined, balance: undefined };
 }
 
@@ -1709,7 +1709,7 @@ export const DelegationResponse = {
   },
 };
 
-function createBaseRedelegationEntryResponse(): RedelegationEntryResponse {
+export function createBaseRedelegationEntryResponse(): RedelegationEntryResponse {
   return { redelegationEntry: undefined, balance: "" };
 }
 
@@ -1775,7 +1775,7 @@ export const RedelegationEntryResponse = {
   },
 };
 
-function createBaseRedelegationResponse(): RedelegationResponse {
+export function createBaseRedelegationResponse(): RedelegationResponse {
   return { redelegation: undefined, entries: [] };
 }
 
@@ -1843,7 +1843,7 @@ export const RedelegationResponse = {
   },
 };
 
-function createBasePool(): Pool {
+export function createBasePool(): Pool {
   return { notBondedTokens: "", bondedTokens: "" };
 }
 
@@ -1901,7 +1901,7 @@ export const Pool = {
   },
 };
 
-function createBaseValidatorUpdates(): ValidatorUpdates {
+export function createBaseValidatorUpdates(): ValidatorUpdates {
   return { updates: [] };
 }
 
@@ -1954,10 +1954,11 @@ export const ValidatorUpdates = {
   },
 };
 
-declare var self: any | undefined;
-declare var window: any | undefined;
-declare var global: any | undefined;
-var globalThis: any = (() => {
+export declare var self: any | undefined;
+export declare var window: any | undefined;
+export declare var global: any | undefined;
+
+export var globalThis: any = (() => {
   if (typeof globalThis !== "undefined") {
     return globalThis;
   }
@@ -1973,7 +1974,7 @@ var globalThis: any = (() => {
   throw "Unable to locate global object";
 })();
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
+export type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 export type DeepPartial<T> = T extends Builtin
   ? T
@@ -1985,24 +1986,24 @@ export type DeepPartial<T> = T extends Builtin
   ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
-type KeysOfUnion<T> = T extends T ? keyof T : never;
+export type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
 
-function toTimestamp(date: Date): Timestamp {
+export function toTimestamp(date: Date): Timestamp {
   const seconds = date.getTime() / 1_000;
   const nanos = (date.getTime() % 1_000) * 1_000_000;
   return { seconds, nanos };
 }
 
-function fromTimestamp(t: Timestamp): Date {
+export function fromTimestamp(t: Timestamp): Date {
   let millis = t.seconds * 1_000;
   millis += t.nanos / 1_000_000;
   return new Date(millis);
 }
 
-function fromJsonTimestamp(o: any): Date {
+export function fromJsonTimestamp(o: any): Date {
   if (o instanceof Date) {
     return o;
   } else if (typeof o === "string") {
@@ -2012,7 +2013,7 @@ function fromJsonTimestamp(o: any): Date {
   }
 }
 
-function longToNumber(long: Long): number {
+export function longToNumber(long: Long): number {
   if (long.gt(Number.MAX_SAFE_INTEGER)) {
     throw new globalThis.Error("Value is larger than Number.MAX_SAFE_INTEGER");
   }
@@ -2024,6 +2025,6 @@ if (_m0.util.Long !== Long) {
   _m0.configure();
 }
 
-function isSet(value: any): boolean {
+export function isSet(value: any): boolean {
   return value !== null && value !== undefined;
 }

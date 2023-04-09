@@ -113,7 +113,7 @@ export interface MsgCommunityPoolSpend {
  */
 export interface MsgCommunityPoolSpendResponse {}
 
-function createBaseMsgSetWithdrawAddress(): MsgSetWithdrawAddress {
+export function createBaseMsgSetWithdrawAddress(): MsgSetWithdrawAddress {
   return { delegatorAddress: "", withdrawAddress: "" };
 }
 
@@ -171,7 +171,7 @@ export const MsgSetWithdrawAddress = {
   },
 };
 
-function createBaseMsgSetWithdrawAddressResponse(): MsgSetWithdrawAddressResponse {
+export function createBaseMsgSetWithdrawAddressResponse(): MsgSetWithdrawAddressResponse {
   return {};
 }
 
@@ -210,7 +210,7 @@ export const MsgSetWithdrawAddressResponse = {
   },
 };
 
-function createBaseMsgWithdrawDelegatorReward(): MsgWithdrawDelegatorReward {
+export function createBaseMsgWithdrawDelegatorReward(): MsgWithdrawDelegatorReward {
   return { delegatorAddress: "", validatorAddress: "" };
 }
 
@@ -268,7 +268,7 @@ export const MsgWithdrawDelegatorReward = {
   },
 };
 
-function createBaseMsgWithdrawDelegatorRewardResponse(): MsgWithdrawDelegatorRewardResponse {
+export function createBaseMsgWithdrawDelegatorRewardResponse(): MsgWithdrawDelegatorRewardResponse {
   return { amount: [] };
 }
 
@@ -321,7 +321,7 @@ export const MsgWithdrawDelegatorRewardResponse = {
   },
 };
 
-function createBaseMsgWithdrawValidatorCommission(): MsgWithdrawValidatorCommission {
+export function createBaseMsgWithdrawValidatorCommission(): MsgWithdrawValidatorCommission {
   return { validatorAddress: "" };
 }
 
@@ -370,7 +370,7 @@ export const MsgWithdrawValidatorCommission = {
   },
 };
 
-function createBaseMsgWithdrawValidatorCommissionResponse(): MsgWithdrawValidatorCommissionResponse {
+export function createBaseMsgWithdrawValidatorCommissionResponse(): MsgWithdrawValidatorCommissionResponse {
   return { amount: [] };
 }
 
@@ -423,7 +423,7 @@ export const MsgWithdrawValidatorCommissionResponse = {
   },
 };
 
-function createBaseMsgFundCommunityPool(): MsgFundCommunityPool {
+export function createBaseMsgFundCommunityPool(): MsgFundCommunityPool {
   return { amount: [], depositor: "" };
 }
 
@@ -485,7 +485,7 @@ export const MsgFundCommunityPool = {
   },
 };
 
-function createBaseMsgFundCommunityPoolResponse(): MsgFundCommunityPoolResponse {
+export function createBaseMsgFundCommunityPoolResponse(): MsgFundCommunityPoolResponse {
   return {};
 }
 
@@ -524,7 +524,7 @@ export const MsgFundCommunityPoolResponse = {
   },
 };
 
-function createBaseMsgUpdateParams(): MsgUpdateParams {
+export function createBaseMsgUpdateParams(): MsgUpdateParams {
   return { authority: "", params: undefined };
 }
 
@@ -583,7 +583,7 @@ export const MsgUpdateParams = {
   },
 };
 
-function createBaseMsgUpdateParamsResponse(): MsgUpdateParamsResponse {
+export function createBaseMsgUpdateParamsResponse(): MsgUpdateParamsResponse {
   return {};
 }
 
@@ -622,7 +622,7 @@ export const MsgUpdateParamsResponse = {
   },
 };
 
-function createBaseMsgCommunityPoolSpend(): MsgCommunityPoolSpend {
+export function createBaseMsgCommunityPoolSpend(): MsgCommunityPoolSpend {
   return { authority: "", recipient: "", amount: [] };
 }
 
@@ -693,7 +693,7 @@ export const MsgCommunityPoolSpend = {
   },
 };
 
-function createBaseMsgCommunityPoolSpendResponse(): MsgCommunityPoolSpendResponse {
+export function createBaseMsgCommunityPoolSpendResponse(): MsgCommunityPoolSpendResponse {
   return {};
 }
 
@@ -822,11 +822,11 @@ export class MsgClientImpl implements Msg {
   }
 }
 
-interface Rpc {
+export interface Rpc {
   request(service: string, method: string, data: Uint8Array): Promise<Uint8Array>;
 }
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
+export type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 export type DeepPartial<T> = T extends Builtin
   ? T
@@ -838,11 +838,11 @@ export type DeepPartial<T> = T extends Builtin
   ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
-type KeysOfUnion<T> = T extends T ? keyof T : never;
+export type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
 
-function isSet(value: any): boolean {
+export function isSet(value: any): boolean {
   return value !== null && value !== undefined;
 }
