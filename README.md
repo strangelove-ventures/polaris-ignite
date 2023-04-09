@@ -14,7 +14,7 @@ Interact with cosmos chains without the tears 😭
 
 `polaris-ignite` is a JavaScript client generated using [`ignite/cli`](https://github.com/ignite/cli)'s [generate ts-client command](https://docs.ignite.com/references/cli#ignite-generate-ts-client) from [`cosmos/cosmos-sdk@v0.47.1`](./cosmos-sdk) with specific fixes and codemods.
 
-Generated sources from `ignite/cli` has various type issues that are fixed by running `eslint` and modifying the AST using [`magicast`](https://github.com/unjs/magicast) which does the following:
+Generated sources from `ignite/cli` has various type issues that are fixed by running `eslint` and modifying the AST using [`benjamn/recast`](https://github.com/benjamn/recast) which does the following:
 
 - Fully type-safe sources by fixing/removing invalid generated code
 - Remove all Keplr related imports and declarations
