@@ -1,3 +1,6 @@
 [submodule "cosmos-sdk"]
 	path = cosmos-sdk
 	url = https://github.com/cosmos/cosmos-sdk.git
+[submodule "sommelier"]
+	path = sommelier
+	url = https://github.com/PeggyJV/sommelier.git
