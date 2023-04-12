@@ -130,11 +130,13 @@ const removeUnusedPrefix = Codemod.fn("removing unused prefix", async () => {
                 ObjectProperty: (p3) => {
                   if (t.isIdentifier(p3.node.key, { name: "prefix" })) {
                     p3.remove();
+                    p3.skip();
                   }
                 },
               });
             },
           });
+          p1.skip();
         }
       },
     });

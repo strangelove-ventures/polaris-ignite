@@ -1,10 +1,12 @@
 import * as fs from "node:fs/promises";
 import { performance } from "node:perf_hooks";
 
-import prettierConfig from "@strangelovelabs/style-guide/prettier";
+import { extendPrettier } from "@strangelovelabs/style-guide";
 import { globby } from "globby";
 import pmap from "p-map";
 import * as prettier from "prettier";
+
+const prettierConfig = extendPrettier();
 
 const format = async () => {
   const t0 = performance.now();
