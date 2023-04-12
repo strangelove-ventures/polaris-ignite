@@ -1,27 +1,10 @@
 // @ts-check
 
+const { extendEslint } = require("@strangelovelabs/style-guide");
 const { TYPESCRIPT_FILES } = require("@strangelovelabs/style-guide/eslint/constants");
-const { getTsconfigPath } = require("@strangelovelabs/style-guide/eslint/utils/tsconfig");
 
-const tsconfigPath = getTsconfigPath();
-
-/** @type {import("eslint").Linter.Config} */
-const eslintConfig = {
-  extends: [
-    require.resolve("@strangelovelabs/style-guide/eslint/browser-node"),
-    require.resolve("@strangelovelabs/style-guide/eslint/typescript"),
-  ],
-  ignorePatterns: ["dist", "node_modules"],
-  parserOptions: {
-    project: tsconfigPath,
-  },
-  settings: {
-    "import/resolver": {
-      typescript: {
-        project: tsconfigPath,
-      },
-    },
-  },
+module.exports = extendEslint(["browser-node", "typescript"], {
+  ignorePatterns: ["dist"],
   rules: {
     camelcase: ["off"],
     "eslint-comments/disable-enable-pair": ["off"],
@@ -42,6 +25,4 @@ const eslintConfig = {
     },
   ],
   root: true,
-};
-
-module.exports = eslintConfig;
+});
