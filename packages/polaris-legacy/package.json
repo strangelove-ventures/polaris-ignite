@@ -23,7 +23,7 @@
     "lint": "eslint --fix \"src/**/*.ts\""
   },
   "dependencies": {
-    "oazapfts": "^4.6.0"
+    "oazapfts": "^4.7.0"
   },
   "devDependencies": {},
   "keywords": [],

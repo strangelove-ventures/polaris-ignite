@@ -6,16 +6,16 @@
   "devDependencies": {
     "@babel/traverse": "^7.21.5",
     "@babel/types": "^7.21.5",
-    "@strangelovelabs/style-guide": "^2.0.0",
+    "@strangelovelabs/style-guide": "^2.0.1",
     "@types/babel__traverse": "^7.18.5",
     "@types/prettier": "^2.7.2",
     "eslint": "^8.39.0",
     "globby": "^13.1.4",
-    "p-map": "^5.5.0",
+    "p-map": "^6.0.0",
     "prettier": "^2.8.8",
     "recast": "^0.22.0",
     "tsup": "^6.7.0",
-    "tsx": "^3.12.6"
+    "tsx": "^3.12.7"
   },
   "prettier": "@strangelovelabs/style-guide/prettier",
   "private": true
