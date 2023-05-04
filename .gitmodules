@@ -4,3 +4,6 @@
 [submodule "sommelier"]
 	path = sommelier
 	url = https://github.com/PeggyJV/sommelier.git
+[submodule "gravity-bridge"]
+	path = gravity-bridge
+	url = https://github.com/PeggyJV/gravity-bridge
